@@ -10,23 +10,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/game.js":
-/*!*********************!*\
-  !*** ./src/game.js ***!
-  \*********************/
+/***/ "./src/scripts/game.js":
+/*!*****************************!*\
+  !*** ./src/scripts/game.js ***!
+  \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   greeting: () => (/* binding */ greeting)\n/* harmony export */ });\n// greeting.js\nconst greeting = \"Hello, Odinite!\";\n\n\n//# sourceURL=webpack://connect-four-game/./src/game.js?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   greeting: () => (/* binding */ greeting)\n/* harmony export */ });\n// greeting.js\nconst greeting = \"Hello, Odinite!\";\n\n\n//# sourceURL=webpack://connect-four-game/./src/scripts/game.js?\n}");
 
 /***/ }),
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
+/***/ "./src/scripts/index.js":
+/*!******************************!*\
+  !*** ./src/scripts/index.js ***!
+  \******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./game */ \"./src/game.js\");\n// index.js\n\n\nconsole.log(_game__WEBPACK_IMPORTED_MODULE_0__.greeting);\n\n\n//# sourceURL=webpack://connect-four-game/./src/index.js?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./game */ \"./src/scripts/game.js\");\n// index.js\n\n\nconsole.log(_game__WEBPACK_IMPORTED_MODULE_0__.greeting);\n\n\n//# sourceURL=webpack://connect-four-game/./src/scripts/index.js?\n}");
 
 /***/ })
 
@@ -90,7 +90,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ga
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/scripts/index.js");
 /******/ 	
 /******/ })()
 ;

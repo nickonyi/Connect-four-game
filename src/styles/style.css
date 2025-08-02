@@ -18,11 +18,13 @@ body {
 
 .main-menu-tab {
   background-color: #7945ff;
-  height: 380px;
-  width: 450px;
+  height: 400px;
+  width: 430px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 25px;
+  box-shadow: 0 0 0 2px black, 0 10px 0 2px black;
 }
 
 .menu-logo {
@@ -38,15 +40,29 @@ body {
 }
 
 .menu-btn {
-  height: 40px;
+  height: 45px;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-inline: 20px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 0 2px black, 0 5px 0 2px black;
+  font-family: "Space Grotesk", sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .icon {
   width: 40px;
   height: 40px;
+}
+
+.comp-btn {
+  background-color: #fd6687;
+}
+
+.player-btn {
+  background-color: #ffce67;
 }

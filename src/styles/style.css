@@ -29,6 +29,7 @@ body {
 
 .menu-logo {
   padding-block: 3.5rem;
+  cursor: pointer;
 }
 
 .menu-btns {
@@ -52,6 +53,7 @@ body {
   font-family: "Space Grotesk", sans-serif;
   text-transform: uppercase;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .icon {
@@ -65,4 +67,16 @@ body {
 
 .player-btn {
   background-color: #ffce67;
+}
+
+/** Games rules css**/
+.game-rules-tab {
+  background-color: white;
+  padding-inline: 20px;
+  width: 500px;
+}
+
+.rules-title {
+  text-align: center;
+  text-transform: uppercase;
 }

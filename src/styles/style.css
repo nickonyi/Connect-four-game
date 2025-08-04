@@ -6,8 +6,12 @@
   box-sizing: border-box;
 }
 
-body {
+html {
   font-family: "Space Grotesk", sans-serif;
+  font-size: 1.2rem;
+}
+
+body {
   font-size: 1rem;
   background-color: #5c2dd5;
   display: flex;
@@ -131,4 +135,62 @@ body {
   opacity: 0;
   transform: translateY(-100%);
   pointer-events: none;
+}
+
+/* Ingame menu css */
+.ingame-menu-tab {
+  width: 400px;
+  background: #7945ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  box-shadow: 0 0 0 2px black, 0 10px 0 2px black;
+  border-radius: 20px;
+}
+
+.ingame-menu-title {
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  color: white;
+  margin-top: 3.5rem;
+  font-weight: 500;
+}
+
+.ingame-menu-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding-inline: 30px;
+  margin-bottom: 40px;
+}
+
+.ingame-menu-btn {
+  padding-block: 15px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: "Space Grotesk", sans-serif;
+  border-radius: 15px;
+  border: none;
+  font-size: 0.875rem;
+}
+
+#resume-btn,
+#quit-btn {
+  box-shadow: 0 0 0 2px black, 0 7px 0 2px black;
+}
+
+#restart-btn {
+  box-shadow: 0 0 0 2px #5c2dd5, 0 7px 0 2px #5c2dd5;
+}
+
+#resume-btn,
+#restart-btn {
+  background-color: #fff;
+}
+
+#quit-btn {
+  background-color: #fd6687;
+  color: #fff;
 }

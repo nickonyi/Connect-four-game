@@ -2,6 +2,7 @@ import "../styles/style.css";
 
 const gameRulesBtn = document.querySelector("#game-rules-btn");
 const checkBtn = document.querySelector(".close-rules-btn");
+const menuBtn = document.querySelector(".menu-logo");
 
 const toggleBoxes = () => {
   const box1 = document.querySelector(".main-menu-tab");
@@ -16,5 +17,10 @@ const toggleBoxes = () => {
   }
 };
 
+const bringMenu = () => {
+  document.querySelector(".modal").style.display = "flex";
+};
+
 gameRulesBtn.addEventListener("click", toggleBoxes);
+menuBtn.addEventListener("click", bringMenu);
 checkBtn.addEventListener("click", toggleBoxes);

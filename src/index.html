@@ -14,7 +14,7 @@
   <body>
     <!-- Main menu start -->
 
-    <div class="main-menu-tab tab hidden">
+    <div class="main-menu-tab tab visible">
       <div class="menu-logo">
         <img
           src="./assets/images/logo.svg"
@@ -78,14 +78,18 @@
     <!-- Rules end -->
 
     <!-- Ingame menu start -->
-    <div class="ingame-menu-tab tab visible">
-      <h1 class="ingame-menu-title">Pause</h1>
-      <div class="ingame-menu-btns">
-        <button id="resume-btn" class="ingame-menu-btn">Continue game</button>
-        <button id="restart-btn" class="ingame-menu-btn">Restart</button>
-        <button id="quit-btn" class="ingame-menu-btn">Quit game</button>
+
+    <section id="ingame-section" class="modal">
+      <div class="ingame-menu-tab">
+        <h1 class="ingame-menu-title">Pause</h1>
+        <div class="ingame-menu-btns">
+          <button id="resume-btn" class="ingame-menu-btn">Continue game</button>
+          <button id="restart-btn" class="ingame-menu-btn">Restart</button>
+          <button id="quit-btn" class="ingame-menu-btn">Quit game</button>
+        </div>
       </div>
-    </div>
+    </section>
+
     <!-- Ingame menu end -->
 
     <!-- Game board start -->

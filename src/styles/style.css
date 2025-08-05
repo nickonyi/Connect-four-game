@@ -204,3 +204,49 @@ body {
   background-color: #fd6687;
   color: #fff;
 }
+
+.play {
+  display: none;
+}
+
+/* Player Board CSS */
+#game-board {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.player-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.game-info-player {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.player-board-container {
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+.board-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.board-base {
+  z-index: 1;
+}
+
+.board-overlay {
+  z-index: 2;
+}

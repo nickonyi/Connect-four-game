@@ -14,7 +14,7 @@
   <body>
     <!-- Main menu start -->
 
-    <div class="main-menu-tab tab visible">
+    <div class="main-menu-tab tab visible play">
       <div class="menu-logo">
         <img
           src="./assets/images/logo.svg"
@@ -97,6 +97,45 @@
     Menu Restart Player 1 Player 2 Player 1's turn Player 2's turn Wins Play
     again
     -->
+    <section id="game-board" class="game-board tab visible">
+      <!-- Game board header -->
+      <div class="game-info">
+        <div class="game-info-menu">menu</div>
+        <div class="game-info-logo">
+          <img
+            src="./assets/images/logo.svg"
+            alt="Connect Four game logo"
+            class="logo"
+          />
+        </div>
+        <div class="game-info-restart">restart</div>
+      </div>
+      <!-- Game board header end -->
+      <div class="game-info-player">
+        <div class="player-1">
+          <span class="player-name">Player 1</span>
+          <span class="player-score">0</span>
+          <img
+            src="./assets/images/player-one.svg"
+            alt="Player 1"
+            class="player-icon"
+          />
+        </div>
+        <div class="player-board-container">
+             <img class="board-layer board-base " src="./assets/images/board-layer-black-large.svg" alt="">
+             <img class="board-layer board-overlay" src="./assets/images/board-layer-white-large.svg" alt="">
+        </div>
+        <div class="player-2">
+          <span class="player-name">Player 2</span>
+          <span class="player-score">0</span>
+          <img
+            src="./assets/images/player-two.svg"
+            alt="Player 2"
+            class="player-icon"
+          />
+        </div>
+
+    </section>
 
     <!-- Game board end -->
   </body>

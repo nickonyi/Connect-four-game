@@ -209,9 +209,6 @@ body {
   color: #fff;
 }
 
-.play {
-  display: none;
-}
 .box-shadow-black {
   box-shadow: 0 0 0 2px black, 0 7px 0 2px black;
 }
@@ -224,7 +221,7 @@ body {
   align-items: center;
   background-color: #7945ff;
   padding-top: 40px;
-  height: 100vh;
+  height: 550px;
 }
 
 .game-info {

@@ -217,7 +217,7 @@ body {
 }
 
 /* Player Board CSS */
-#game-board {
+#game-screen {
   width: 100%;
   display: flex;
   flex-direction: column;

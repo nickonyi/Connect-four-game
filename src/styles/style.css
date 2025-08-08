@@ -32,6 +32,10 @@ body {
   border-radius: 25px;
   box-shadow: 0 0 0 2px black, 0 10px 0 2px black;
 }
+.main-menu-tab,
+.rules-section {
+  margin-top: 50px;
+}
 
 .menu-logo {
   padding-block: 3.5rem;
@@ -128,7 +132,6 @@ body {
   transition: transform 1.4s ease;
   position: absolute;
   top: 50%;
-  margin-top: 50px;
 }
 .visible {
   opacity: 1;
@@ -221,7 +224,7 @@ body {
   align-items: center;
   background-color: #7945ff;
   padding-top: 40px;
-  height: 500px;
+  height: 100vh;
 }
 
 .game-info {

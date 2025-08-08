@@ -77,11 +77,11 @@ body {
   height: 40px;
 }
 
-.comp-btn {
+#cpu-btn {
   background-color: #fd6687;
 }
 
-.player-btn {
+#pvp-btn {
   background-color: #ffce67;
 }
 

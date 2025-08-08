@@ -128,6 +128,7 @@ body {
   transition: transform 1.4s ease;
   position: absolute;
   top: 50%;
+  margin-top: 50px;
 }
 .visible {
   opacity: 1;

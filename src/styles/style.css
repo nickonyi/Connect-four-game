@@ -259,6 +259,7 @@ body {
   background-color: #fff;
   height: 100px;
   position: relative;
+  width: 100px;
   padding-inline: 15px;
   display: flex;
   flex-direction: column;

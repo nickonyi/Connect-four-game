@@ -1,3 +1,8 @@
+import playerOneIcon from "../assets/images/player-one.svg";
+import playerTwoIcon from "../assets/images/player-two.svg";
+import youIcon from "../assets/images/you.svg";
+import cpuIcon from "../assets/images/cpu.svg";
+
 export const UIcontroller = () => {
   const homeScreen = document.getElementById("home-screen");
   const gameScreen = document.getElementById("game-screen");
@@ -15,7 +20,7 @@ export const UIcontroller = () => {
       <div class="player-box box-shadow-black">
         <div class="player-name">Player 1</div>
         <div class="player-score">0</div>
-        <img src="./assets/images/player-one.svg" alt="" class="player-icon" />
+        <img src="${playerOneIcon}" alt="" class="player-icon" />
       </div>
     `;
 
@@ -23,7 +28,7 @@ export const UIcontroller = () => {
       <div class="player-box box-shadow-black">
         <div class="player-name">Player 2</div>
         <div class="player-score">0</div>
-        <img src="./assets/images/player-two.svg" alt="" class="player-icon" />
+        <img src="${playerTwoIcon}" alt="" class="player-icon" />
       </div>
     `;
     }
@@ -33,7 +38,7 @@ export const UIcontroller = () => {
       <div class="player-box box-shadow-black">
         <div class="player-name">You</div>
         <div class="player-score">0</div>
-        <img src="./assets/images/player-one.svg" alt="" class="player-icon" />
+        <img src="${youIcon}" alt="" class="player-icon" />
       </div>
     `;
 
@@ -41,7 +46,7 @@ export const UIcontroller = () => {
       <div class="player-box box-shadow-black">
         <div class="player-name">CPU</div>
         <div class="player-score">0</div>
-        <img src="./assets/images/cpu-icon.svg" alt="" class="player-icon" />
+      <img src="${cpuIcon}" alt="" class="player-icon" />
       </div>
     `;
     }

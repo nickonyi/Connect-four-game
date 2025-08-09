@@ -278,6 +278,7 @@ body {
 .player-name {
   margin-top: 20px;
   font-weight: 700;
+  text-align: center;
   text-transform: uppercase;
 }
 .player-score {

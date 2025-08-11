@@ -3,7 +3,7 @@ import playerTwoIcon from "../assets/images/player-two.svg";
 import youIcon from "../assets/images/you.svg";
 import cpuIcon from "../assets/images/cpu.svg";
 
-export const UIcontroller = () => {
+export const UIcontroller = (startGame) => {
   const homeScreen = document.getElementById("home-screen");
   const gameScreen = document.getElementById("game-screen");
   const leftScoreboard = document.getElementById("left-scoreboard");
@@ -56,11 +56,13 @@ export const UIcontroller = () => {
     document.getElementById("pvp-btn").addEventListener("click", () => {
       updateScoreboard("pvp");
       showGameScreen();
+      startGame("pvp");
     });
 
     document.getElementById("cpu-btn").addEventListener("click", () => {
       updateScoreboard("cpu");
       showGameScreen();
+      startGame("cpu");
     });
   };
 

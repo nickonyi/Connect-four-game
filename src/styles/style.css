@@ -292,6 +292,7 @@ body {
   height: auto;
   aspect-ratio: 1 / 1;
 }
+
 .board-layer {
   position: absolute;
   top: 0;
@@ -309,6 +310,50 @@ body {
   z-index: 2;
 }
 
+#player-indicator {
+  position: absolute;
+  top: -30px;
+  left: 15px;
+  transition: left 0.2s ease;
+}
+#player-indicator img {
+  width: 25px;
+  height: 25px;
+}
+#pieces-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.click-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: calc(100% / 7);
+  cursor: pointer;
+}
+.click-zone[data-col="0"] {
+  left: 0%;
+}
+.click-zone[data-col="1"] {
+  left: 14.28%;
+}
+.click-zone[data-col="2"] {
+  left: 28.56%;
+}
+.click-zone[data-col="3"] {
+  left: 42.84%;
+}
+.click-zone[data-col="4"] {
+  left: 57.12%;
+}
+.click-zone[data-col="5"] {
+  left: 71.4%;
+}
+.click-zone[data-col="6"] {
+  left: 85.68%;
+}
 .game-board-footer {
   width: 100%;
   padding-bottom: 30px;

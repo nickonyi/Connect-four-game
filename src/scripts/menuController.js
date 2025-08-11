@@ -10,12 +10,12 @@ export const MenuConroller = () => {
     const box1 = document.querySelector(".main-menu-tab");
     const box2 = document.querySelector(".rules-section");
 
-    if (box1.classList.contains("visible")) {
-      box1.classList.replace("visible", "hidden");
-      box2.classList.replace("hidden", "visible");
+    if (box1.classList.contains("hidden")) {
+      box1.classList.remove("hidden");
+      box2.classList.add("hidden");
     } else {
-      box2.classList.replace("visible", "hidden");
-      box1.classList.replace("hidden", "visible");
+      box1.classList.add("hidden");
+      box2.classList.remove("hidden");
     }
   };
 

@@ -16,6 +16,7 @@ export function gameBoardFactory(
     zones.forEach((zone) => {
       const col = parseInt(zone.dataset.col, 10);
       zone.addEventListener("mouseenter", () => moveMarker(col));
+      zone.addEventListener("click", () => handleColumnClick(col));
     });
   };
 
@@ -27,6 +28,34 @@ export function gameBoardFactory(
     }px`;
   };
 
+  const handleColumnClick = (col) => {
+    alert(col);
+    const dropRow = findAvailableRow(col);
+    if (dropRow === null) return;
+    board[dropRow][col] = currentPlayer;
+    drawPiece(dropRow, col, currentPlayer);
+  };
+
+  const findAvailableRow = (col) => {
+    for (let row = ROWS - 1; row >= 0; row--) {
+      if (board[row][col] === null) return row;
+    }
+    return null;
+  };
+
+  const drawPiece = (row, col, player) => {
+    const piece = document.createElement("img");
+    piece.src = player === "P1" ? piecesAsset.p1 : piecesAsset.p2;
+    piece.classList.add("piece");
+    const colWidth = container.clientWidth / COLS;
+    const rowHeight = container.clientHeight / ROWS;
+    piece.style.position = "absolute";
+    piece.style.left = `${col * colWidth}px`;
+    piece.style.top = `${row * rowHeight}px`;
+    piece.style.width = `${colWidth}px`;
+    piece.style.height = `${rowHeight}px`;
+    piecesContainer.appendChild(piece);
+  };
   return {
     init,
   };

@@ -133,11 +133,6 @@ body {
   position: absolute;
   top: 50%;
 }
-.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
 
 .hidden {
   opacity: 0;
@@ -197,6 +192,7 @@ body {
   border: none;
   font-size: 0.875rem;
   box-shadow: 0 0 0 2px black, 0 7px 0 2px black;
+  cursor: pointer;
 }
 
 #resume-btn,
@@ -231,6 +227,9 @@ body {
   align-items: center;
   gap: 100px;
   padding-bottom: 40px;
+}
+.game-info-menu {
+  cursor: pointer;
 }
 .game-info-btn {
   background-color: #5c2dd5;
@@ -288,7 +287,7 @@ body {
 }
 .player-board-container {
   width: 100%;
-  max-width: 370px;
+  max-width: 400px;
   position: relative;
   height: auto;
   aspect-ratio: 1 / 1;

@@ -54,13 +54,13 @@ export function gameBoardFactory(
   const drawPiece = (row, col, player) => {
     const rect = container.getBoundingClientRect();
     const colWidth = rect.width / COLS;
-    const pieceSize = colWidth * 0.87;
+    const pieceSize = colWidth * 0.94;
 
     const centerX = col * colWidth + colWidth / 2;
     const centerY = rowYMultipliers[row] * rect.height;
 
     const left = centerX - pieceSize / 2;
-    const top = centerY - pieceSize / 2;
+    const finalTop = centerY - pieceSize / 2;
 
     const piece = document.createElement("img");
     piece.src = player === "P1" ? piecesAsset.p1 : piecesAsset.p2;
@@ -71,7 +71,17 @@ export function gameBoardFactory(
     piece.style.left = `${left}px`;
     piece.style.top = `${top}px`;
 
+    // Start above the board
+    piece.style.top = `-${pieceSize}px`;
+
     piecesContainer.appendChild(piece);
+
+    // Force reflow so the browser registers the start position
+    piece.offsetHeight;
+
+    // Animate to final position
+    piece.style.transition = "top 0.4s ease-out";
+    piece.style.top = `${finalTop}px`;
   };
 
   return {

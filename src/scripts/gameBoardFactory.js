@@ -29,10 +29,13 @@ export function gameBoardFactory(
   };
 
   const handleColumnClick = (col) => {
-    alert(col);
+    console.log("Column clicked:", col);
     const dropRow = findAvailableRow(col);
+    console.log("Drop row found:", dropRow);
     if (dropRow === null) return;
     board[dropRow][col] = currentPlayer;
+    console.log(board);
+
     drawPiece(dropRow, col, currentPlayer);
   };
 
@@ -47,13 +50,23 @@ export function gameBoardFactory(
     const piece = document.createElement("img");
     piece.src = player === "P1" ? piecesAsset.p1 : piecesAsset.p2;
     piece.classList.add("piece");
+
     const colWidth = container.clientWidth / COLS;
     const rowHeight = container.clientHeight / ROWS;
+    // shrink slightly so it fits inside hole
+    const scale = container.clientWidth / 740; // ~0.5 for 370px
+    const pieceDiameter = 80 * scale;
+
+    // calculate centered position in hole
+    const left = col * colWidth + (colWidth - pieceDiameter) / 2;
+    const top = row * rowHeight + (rowHeight - pieceDiameter) / 2;
+
     piece.style.position = "absolute";
-    piece.style.left = `${col * colWidth}px`;
-    piece.style.top = `${row * rowHeight}px`;
-    piece.style.width = `${colWidth}px`;
-    piece.style.height = `${rowHeight}px`;
+    piece.style.left = `${left}px`;
+    piece.style.top = `${top}px`;
+    piece.style.width = `${pieceDiameter}px`;
+    piece.style.height = `${pieceDiameter}px`;
+
     piecesContainer.appendChild(piece);
   };
   return {

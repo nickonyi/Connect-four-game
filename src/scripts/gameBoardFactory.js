@@ -6,6 +6,9 @@ export function gameBoardFactory(
 ) {
   const ROWS = 6;
   const COLS = 7;
+  let scaleFactor = 0.82;
+  let offsetX = 0;
+  let offsetY = 0;
   const board = Array(ROWS)
     .fill(null)
     .map(() => Array(COLS).fill(null));
@@ -46,29 +49,31 @@ export function gameBoardFactory(
     return null;
   };
 
+  const rowYMultipliers = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
+
   const drawPiece = (row, col, player) => {
+    const rect = container.getBoundingClientRect();
+    const colWidth = rect.width / COLS;
+    const pieceSize = colWidth * 0.87;
+
+    const centerX = col * colWidth + colWidth / 2;
+    const centerY = rowYMultipliers[row] * rect.height;
+
+    const left = centerX - pieceSize / 2;
+    const top = centerY - pieceSize / 2;
+
     const piece = document.createElement("img");
     piece.src = player === "P1" ? piecesAsset.p1 : piecesAsset.p2;
     piece.classList.add("piece");
-
-    const colWidth = container.clientWidth / COLS;
-    const rowHeight = container.clientHeight / ROWS;
-    // shrink slightly so it fits inside hole
-    const scale = container.clientWidth / 740; // ~0.5 for 370px
-    const pieceDiameter = 80 * scale;
-
-    // calculate centered position in hole
-    const left = col * colWidth + (colWidth - pieceDiameter) / 2;
-    const top = row * rowHeight + (rowHeight - pieceDiameter) / 2;
-
     piece.style.position = "absolute";
+    piece.style.width = `${pieceSize}px`;
+    piece.style.height = `${pieceSize}px`;
     piece.style.left = `${left}px`;
     piece.style.top = `${top}px`;
-    piece.style.width = `${pieceDiameter}px`;
-    piece.style.height = `${pieceDiameter}px`;
 
     piecesContainer.appendChild(piece);
   };
+
   return {
     init,
   };

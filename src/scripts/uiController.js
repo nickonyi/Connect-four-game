@@ -14,7 +14,7 @@ export const UIcontroller = (startGame) => {
     gameScreen.classList.remove("hidden");
   };
 
-  const updateScoreboard = (mode) => {
+  const pickScoreboard = (mode) => {
     if (mode === "pvp") {
       leftScoreboard.innerHTML = `
       <div class="player-box box-shadow-black">
@@ -54,13 +54,13 @@ export const UIcontroller = (startGame) => {
 
   const bindEvents = () => {
     document.getElementById("pvp-btn").addEventListener("click", () => {
-      updateScoreboard("pvp");
+      pickScoreboard("pvp");
       showGameScreen();
       startGame("pvp");
     });
 
     document.getElementById("cpu-btn").addEventListener("click", () => {
-      updateScoreboard("cpu");
+      pickScoreboard("cpu");
       showGameScreen();
       startGame("cpu");
     });

@@ -325,7 +325,9 @@ body {
   top: 0;
   left: 0;
 }
-
+.piece {
+  transition: top 0.4s ease-out;
+}
 .click-zone {
   position: absolute;
   top: 0;

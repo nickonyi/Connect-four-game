@@ -6,9 +6,6 @@ export function gameBoardFactory(
 ) {
   const ROWS = 6;
   const COLS = 7;
-  let scaleFactor = 0.82;
-  let offsetX = 0;
-  let offsetY = 0;
   const board = Array(ROWS)
     .fill(null)
     .map(() => Array(COLS).fill(null));
@@ -32,13 +29,9 @@ export function gameBoardFactory(
   };
 
   const handleColumnClick = (col) => {
-    console.log("Column clicked:", col);
     const dropRow = findAvailableRow(col);
-    console.log("Drop row found:", dropRow);
     if (dropRow === null) return;
     board[dropRow][col] = currentPlayer;
-    console.log(board);
-
     drawPiece(dropRow, col, currentPlayer);
   };
 
@@ -69,7 +62,6 @@ export function gameBoardFactory(
     piece.style.width = `${pieceSize}px`;
     piece.style.height = `${pieceSize}px`;
     piece.style.left = `${left}px`;
-    piece.style.top = `${top}px`;
 
     // Start above the board
     piece.style.top = `-${pieceSize}px`;
@@ -80,7 +72,6 @@ export function gameBoardFactory(
     piece.offsetHeight;
 
     // Animate to final position
-    piece.style.transition = "top 0.4s ease-out";
     piece.style.top = `${finalTop}px`;
   };
 

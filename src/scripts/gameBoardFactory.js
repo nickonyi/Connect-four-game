@@ -2,14 +2,16 @@ export function gameBoardFactory(
   container,
   marker,
   piecesContainer,
-  piecesAsset
+  piecesAsset,
+  mode
 ) {
   const ROWS = 6;
   const COLS = 7;
   const board = Array(ROWS)
     .fill(null)
     .map(() => Array(COLS).fill(null));
-  const currentPlayer = "P1";
+  let currentPlayer = "P1";
+  const rowYMultipliers = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
 
   const init = () => {
     const zones = document.querySelectorAll(".click-zone");
@@ -33,6 +35,7 @@ export function gameBoardFactory(
     if (dropRow === null) return;
     board[dropRow][col] = currentPlayer;
     drawPiece(dropRow, col, currentPlayer);
+    switchPlayer();
   };
 
   const findAvailableRow = (col) => {
@@ -42,7 +45,14 @@ export function gameBoardFactory(
     return null;
   };
 
-  const rowYMultipliers = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
+  const switchPlayer = () => {
+    if (mode === "pvp") {
+      currentPlayer = currentPlayer === "P1" ? "P2" : "P1";
+    }
+
+    marker.querySelector("img").src =
+      currentPlayer === "P1" ? piecesAsset.markerP1 : piecesAsset.markerP2;
+  };
 
   const drawPiece = (row, col, player) => {
     const rect = container.getBoundingClientRect();

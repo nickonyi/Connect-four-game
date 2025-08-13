@@ -62,7 +62,7 @@ export const UIcontroller = (startGame) => {
     document.getElementById("cpu-btn").addEventListener("click", () => {
       pickScoreboard("cpu");
       showGameScreen();
-      startGame("cpu");
+      startGame("pvc");
     });
   };
 

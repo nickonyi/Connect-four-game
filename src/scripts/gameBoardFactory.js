@@ -35,7 +35,13 @@ export function gameBoardFactory(
     if (dropRow === null) return;
     board[dropRow][col] = currentPlayer;
     drawPiece(dropRow, col, currentPlayer);
-    switchPlayer();
+
+    if (mode === "pvc" && currentPlayer === "P1") {
+      currentPlayer = "cpu";
+      cpuMove();
+    } else {
+      switchPlayer();
+    }
   };
 
   const findAvailableRow = (col) => {
@@ -45,9 +51,23 @@ export function gameBoardFactory(
     return null;
   };
 
+  const cpuMove = () => {
+    let col;
+    do {
+      col = Math.floor(Math.random() * COLS);
+    } while (findAvailableRow(col) === null);
+    {
+      setTimeout(() => {
+        handleColumnClick(col);
+      }, 500);
+    }
+  };
+
   const switchPlayer = () => {
     if (mode === "pvp") {
       currentPlayer = currentPlayer === "P1" ? "P2" : "P1";
+    } else if (mode === "pvc") {
+      currentPlayer = currentPlayer === "cpu" ? "P1" : "cpu";
     }
 
     marker.querySelector("img").src =

@@ -392,11 +392,11 @@ body {
   text-align: center;
   z-index: 3;
 }
-.player-turn-text {
+#player-turn-text {
   font-size: 0.75rem;
 }
 
-.play-timer {
+#play-timer {
   font-size: 2rem;
   font-weight: 600;
 }

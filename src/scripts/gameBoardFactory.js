@@ -1,3 +1,5 @@
+import { timeController } from "./timeController";
+
 export function gameBoardFactory(
   container,
   marker,
@@ -13,6 +15,17 @@ export function gameBoardFactory(
   let currentPlayer = "P1";
   const rowYMultipliers = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
 
+  const turnTimer = timeController(
+    30,
+    () => {
+      const oponent = currentPlayer === "P1" ? "P2" : "P1";
+      declareWinner(oponent);
+    },
+    (timeLeft) => {
+      document.getElementById("play-timer").textContent = `${timeLeft}s`;
+    }
+  );
+
   const init = () => {
     const zones = document.querySelectorAll(".click-zone");
     zones.forEach((zone) => {
@@ -20,6 +33,12 @@ export function gameBoardFactory(
       zone.addEventListener("mouseenter", () => moveMarker(col));
       zone.addEventListener("click", () => handleColumnClick(col));
     });
+
+    turnTimer.start();
+  };
+
+  const declareWinner = (oponent) => {
+    alert(oponent + "is the winner");
   };
 
   const moveMarker = (col) => {
@@ -72,6 +91,9 @@ export function gameBoardFactory(
 
     marker.querySelector("img").src =
       currentPlayer === "P1" ? piecesAsset.markerP1 : piecesAsset.markerP2;
+    document.getElementById("player-turn-text").textContent =
+      currentPlayer === "P1" ? `Player 1's turn` : "Player 2's turn";
+    turnTimer.start();
   };
 
   const drawPiece = (row, col, player) => {

@@ -1,4 +1,5 @@
 import { timeController } from "./timeController";
+import { winChecker } from "./winController";
 
 export function gameBoardFactory(
   container,
@@ -14,7 +15,10 @@ export function gameBoardFactory(
     .map(() => Array(COLS).fill(null));
   let currentPlayer = "P1";
   const rowYMultipliers = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
+  const { checkWin } = winChecker(board);
+  let scores = { P1: 0, P2: 0 };
 
+  //timer function
   const turnTimer = timeController(
     30,
     () => {
@@ -37,7 +41,7 @@ export function gameBoardFactory(
     turnTimer.start();
   };
 
-  const declareWinner = (oponent) => {
+  const declareWinner = (winner) => {
     alert(oponent + "is the winner");
   };
 
@@ -54,6 +58,12 @@ export function gameBoardFactory(
     if (dropRow === null) return;
     board[dropRow][col] = currentPlayer;
     drawPiece(dropRow, col, currentPlayer);
+
+    if (checkWin(currentPlayer)) {
+      turnTimer.stop();
+      declareWinner();
+      return;
+    }
 
     if (mode === "pvc" && currentPlayer === "P1") {
       currentPlayer = "cpu";

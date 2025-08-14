@@ -10,13 +10,18 @@ export function gameBoardFactory(
 ) {
   const ROWS = 6;
   const COLS = 7;
-  const board = Array(ROWS)
-    .fill(null)
-    .map(() => Array(COLS).fill(null));
   let currentPlayer = "P1";
   const rowYMultipliers = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
-  const { checkWin } = winChecker(board);
   let scores = { P1: 0, P2: 0 };
+
+  const createEmptyBoard = () => {
+    return Array(ROWS)
+      .fill(null)
+      .map(() => Array(COLS).fill(null));
+  };
+
+  const board = createEmptyBoard();
+  const { checkWin } = winChecker(board);
 
   //timer function
   const turnTimer = timeController(
@@ -30,6 +35,14 @@ export function gameBoardFactory(
     }
   );
 
+  const startTimer = () => {
+    turnTimer.start();
+  };
+
+  const stopTimer = () => {
+    turnTimer.stop();
+  };
+
   const init = () => {
     const zones = document.querySelectorAll(".click-zone");
     zones.forEach((zone) => {
@@ -38,11 +51,11 @@ export function gameBoardFactory(
       zone.addEventListener("click", () => handleColumnClick(col));
     });
 
-    turnTimer.start();
+    startTimer();
   };
 
   const declareWinner = (winner) => {
-    alert(oponent + "is the winner");
+    alert(winner + "is the winner");
   };
 
   const moveMarker = (col) => {
@@ -60,8 +73,8 @@ export function gameBoardFactory(
     drawPiece(dropRow, col, currentPlayer);
 
     if (checkWin(currentPlayer)) {
-      turnTimer.stop();
-      declareWinner();
+      stopTimer();
+      declareWinner(currentPlayer);
       return;
     }
 
@@ -103,7 +116,7 @@ export function gameBoardFactory(
       currentPlayer === "P1" ? piecesAsset.markerP1 : piecesAsset.markerP2;
     document.getElementById("player-turn-text").textContent =
       currentPlayer === "P1" ? `Player 1's turn` : "Player 2's turn";
-    turnTimer.start();
+    startTimer();
   };
 
   const drawPiece = (row, col, player) => {
@@ -137,7 +150,33 @@ export function gameBoardFactory(
     piece.style.top = `${finalTop}px`;
   };
 
+  const clearBoardUI = () => {
+    document.querySelectorAll(".piece").forEach((piece) => piece.remove());
+  };
+
+  const clearBoardState = () => {
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        board[r][c] = null;
+      }
+    }
+    currentPlayer = "P1";
+    marker.querySelector("img").src = piecesAsset.markerP1;
+    document.getElementById("player-turn-text").textContent = "Player 1's turn";
+  };
+
+  const resetBoard = (shouldStartTimer = false) => {
+    stopTimer();
+    clearBoardUI();
+    clearBoardState();
+
+    if (shouldStartTimer) {
+      startTimer();
+    }
+  };
+
   return {
     init,
+    resetBoard,
   };
 }

@@ -1,3 +1,5 @@
+import { gameBoardFactory } from "./gameBoardFactory";
+
 export const MenuConroller = () => {
   const gameRulesBtn = document.querySelector("#game-rules-btn");
   const checkBtn = document.querySelector(".close-rules-btn");
@@ -5,6 +7,7 @@ export const MenuConroller = () => {
   const continueBtn = document.getElementById("resume-btn");
   const restartBtn = document.getElementById("restart-btn");
   const quitBtn = document.getElementById("quit-btn");
+  const { resetBoard } = gameBoardFactory();
 
   const toggleBoxes = () => {
     const box1 = document.querySelector(".main-menu-tab");
@@ -27,8 +30,13 @@ export const MenuConroller = () => {
     document.querySelector(".modal").style.display = "flex";
   };
 
+  const restartGame = () => {
+    resetBoard(true);
+  };
+
   const quitGame = () => {
     close();
+    resetBoard();
     document.querySelector("#game-screen").classList.add("hidden");
     document.querySelector("#home-screen").classList.remove("hidden");
   };
@@ -38,6 +46,7 @@ export const MenuConroller = () => {
     menuBtn.addEventListener("click", bringMenu);
     checkBtn.addEventListener("click", toggleBoxes);
     continueBtn.addEventListener("click", close);
+    restartBtn.addEventListener("click", restartGame);
     quitBtn.addEventListener("click", quitGame);
   };
 

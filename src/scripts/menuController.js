@@ -23,12 +23,14 @@ export const MenuConroller = (gameBoard) => {
     }
   };
 
-  const close = () => {
+  const resumeGame = () => {
     document.querySelector(".modal").style.display = "none";
+    gameBoard.resumeTime();
   };
 
   const bringMenu = () => {
     document.querySelector(".modal").style.display = "flex";
+    gameBoard.pauseTime();
   };
 
   const restartGame = () => {
@@ -50,7 +52,7 @@ export const MenuConroller = (gameBoard) => {
     gameRulesBtn.addEventListener("click", toggleBoxes);
     menuBtn.addEventListener("click", bringMenu);
     checkBtn.addEventListener("click", toggleBoxes);
-    continueBtn.addEventListener("click", close);
+    continueBtn.addEventListener("click", resumeGame);
     restartBtn.addEventListener("click", restartGame);
     quitBtn.addEventListener("click", quitGame);
   };

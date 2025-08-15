@@ -15,7 +15,23 @@ export const TimeController = (duration, onTimeUp, onTick) => {
     }, 1000);
   };
 
-  const pause = () => {};
+  const pause = () => {
+    if (timerId) clearInterval(timerId);
+    timerId = null;
+  };
+
+  const resume = () => {
+    if (!timerId) {
+      timerId = setInterval(() => {
+        timeLeft--;
+        onTick(timeLeft);
+        if (timeLeft <= 0) {
+          stop();
+          onTimeUp();
+        }
+      }, 1000);
+    }
+  };
 
   const stop = () => {
     if (timerId) {
@@ -24,5 +40,5 @@ export const TimeController = (duration, onTimeUp, onTick) => {
     }
   };
 
-  return { start, stop };
+  return { start, pause, resume, stop };
 };

@@ -30,12 +30,20 @@ export function gameBoardFactory(
     }
   );
 
-  const startTimer = () => {
+  const startTime = () => {
     turnTimer.start();
   };
 
-  const stopTimer = () => {
+  const stopTime = () => {
     turnTimer.stop();
+  };
+
+  const pauseTime = () => {
+    turnTimer.pause();
+  };
+
+  const resumeTime = () => {
+    turnTimer.resume();
   };
 
   const init = () => {
@@ -46,7 +54,7 @@ export function gameBoardFactory(
       zone.addEventListener("click", () => handleColumnClick(col));
     });
 
-    startTimer();
+    startTime();
   };
 
   const declareWinner = (winner) => {
@@ -68,7 +76,7 @@ export function gameBoardFactory(
     drawPiece(dropRow, col, currentPlayer);
 
     if (checkWin(currentPlayer)) {
-      stopTimer();
+      stopTime();
       declareWinner(currentPlayer);
       return;
     }
@@ -111,7 +119,7 @@ export function gameBoardFactory(
       currentPlayer === "P1" ? piecesAsset.markerP1 : piecesAsset.markerP2;
     document.getElementById("player-turn-text").textContent =
       currentPlayer === "P1" ? `Player 1's turn` : "Player 2's turn";
-    startTimer();
+    startTime();
   };
 
   const drawPiece = (row, col, player) => {
@@ -161,17 +169,20 @@ export function gameBoardFactory(
   };
 
   const resetBoard = (shouldStartTimer = false) => {
-    stopTimer();
+    stopTime();
     clearBoardUI();
     clearBoardState();
 
     if (shouldStartTimer) {
-      startTimer();
+      startTime();
     }
   };
 
   return {
     init,
     resetBoard,
+    pauseTime,
+    resumeTime,
+    stopTime,
   };
 }

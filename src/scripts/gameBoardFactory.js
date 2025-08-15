@@ -1,5 +1,6 @@
 import { timeController } from "./timeController";
 import { winChecker } from "./winController";
+import { boardFactory } from "./boardFactory";
 
 export function gameBoardFactory(
   container,
@@ -13,15 +14,9 @@ export function gameBoardFactory(
   let currentPlayer = "P1";
   const rowYMultipliers = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
   let scores = { P1: 0, P2: 0 };
-
-  const createEmptyBoard = () => {
-    return Array(ROWS)
-      .fill(null)
-      .map(() => Array(COLS).fill(null));
-  };
-
-  const board = createEmptyBoard();
+  const board = boardFactory(6, 7);
   const { checkWin } = winChecker(board);
+  const gameBoard = board.getState();
 
   //timer function
   const turnTimer = timeController(
@@ -69,7 +64,7 @@ export function gameBoardFactory(
   const handleColumnClick = (col) => {
     const dropRow = findAvailableRow(col);
     if (dropRow === null) return;
-    board[dropRow][col] = currentPlayer;
+    gameBoard[dropRow][col] = currentPlayer;
     drawPiece(dropRow, col, currentPlayer);
 
     if (checkWin(currentPlayer)) {
@@ -88,7 +83,7 @@ export function gameBoardFactory(
 
   const findAvailableRow = (col) => {
     for (let row = ROWS - 1; row >= 0; row--) {
-      if (board[row][col] === null) return row;
+      if (gameBoard[row][col] === null) return row;
     }
     return null;
   };

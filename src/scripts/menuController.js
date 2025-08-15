@@ -7,7 +7,8 @@ export const MenuConroller = () => {
   const continueBtn = document.getElementById("resume-btn");
   const restartBtn = document.getElementById("restart-btn");
   const quitBtn = document.getElementById("quit-btn");
-  const { resetBoard } = gameBoardFactory();
+  const marker = document.getElementById("player-indicator");
+  const { resetBoard } = gameBoardFactory(marker);
 
   const toggleBoxes = () => {
     const box1 = document.querySelector(".main-menu-tab");
@@ -34,11 +35,15 @@ export const MenuConroller = () => {
     resetBoard(true);
   };
 
+  const returnToHomeScreen = () => {
+    document.querySelector("#game-screen").classList.add("hidden");
+    document.querySelector("#home-screen").classList.remove("hidden");
+  };
+
   const quitGame = () => {
     close();
     resetBoard();
-    document.querySelector("#game-screen").classList.add("hidden");
-    document.querySelector("#home-screen").classList.remove("hidden");
+    returnToHomeScreen();
   };
 
   const bindEvents = () => {

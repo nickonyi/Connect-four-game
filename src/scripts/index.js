@@ -22,8 +22,7 @@ const pieceAssets = {
 
 const App = (() => {
   let game;
-
-  const menu = MenuConroller();
+  let menu;
 
   const startGame = (mode) => {
     game = gameBoardFactory(
@@ -33,16 +32,18 @@ const App = (() => {
       pieceAssets,
       mode
     );
+
     game.init();
+
+    menu = MenuConroller(game);
+    menu.init();
   };
 
   const ui = UIcontroller(startGame);
 
   const start = () => {
-    menu.init();
     ui.init();
   };
-
   return { start };
 })();
 

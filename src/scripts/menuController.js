@@ -1,6 +1,6 @@
 import { gameBoardFactory } from "./gameBoardFactory";
 
-export const MenuConroller = () => {
+export const MenuConroller = (gameBoard) => {
   const gameRulesBtn = document.querySelector("#game-rules-btn");
   const checkBtn = document.querySelector(".close-rules-btn");
   const menuBtn = document.querySelector(".game-info-menu");
@@ -42,7 +42,7 @@ export const MenuConroller = () => {
 
   const quitGame = () => {
     close();
-    resetBoard();
+    gameBoard.resetBoard();
     returnToHomeScreen();
   };
 

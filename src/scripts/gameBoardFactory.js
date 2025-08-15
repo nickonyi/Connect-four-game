@@ -150,14 +150,14 @@ export function gameBoardFactory(
   };
 
   const clearBoardState = () => {
-    for (let r = 0; r < ROWS; r++) {
-      for (let c = 0; c < COLS; c++) {
-        board[r][c] = null;
-      }
-    }
+    board.clear();
     currentPlayer = "P1";
     marker.querySelector("img").src = piecesAsset.markerP1;
     document.getElementById("player-turn-text").textContent = "Player 1's turn";
+  };
+
+  const resetScores = () => {
+    scores = { P1: 0, P2: 0 };
   };
 
   const resetBoard = (shouldStartTimer = false) => {

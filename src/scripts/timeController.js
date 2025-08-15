@@ -1,4 +1,4 @@
-export const timeController = (duration, onTimeUp, onTick) => {
+export const TimeController = (duration, onTimeUp, onTick) => {
   let timeLeft = duration;
   let timerId = null;
 
@@ -14,6 +14,8 @@ export const timeController = (duration, onTimeUp, onTick) => {
       }
     }, 1000);
   };
+
+  const pause = () => {};
 
   const stop = () => {
     if (timerId) {

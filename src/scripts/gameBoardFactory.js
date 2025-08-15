@@ -1,4 +1,4 @@
-import { timeController } from "./timeController";
+import { TimeController } from "./timeController";
 import { winChecker } from "./winController";
 import { boardFactory } from "./boardFactory";
 
@@ -19,7 +19,7 @@ export function gameBoardFactory(
   const gameBoard = board.getState();
 
   //timer function
-  const turnTimer = timeController(
+  const turnTimer = TimeController(
     30,
     () => {
       const oponent = currentPlayer === "P1" ? "P2" : "P1";

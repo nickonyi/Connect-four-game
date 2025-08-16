@@ -106,8 +106,6 @@ export function gameBoardFactory(
     if (dropRow === null) return;
     gameBoard[dropRow][col] = currentPlayer;
     drawPiece(dropRow, col, currentPlayer);
-    console.log(gameBoard);
-    console.log(checkWin(currentPlayer));
 
     if (checkWin(currentPlayer)) {
       stopTime();

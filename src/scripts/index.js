@@ -36,13 +36,15 @@ const App = (() => {
     game.init();
 
     menu = MenuConroller(game);
-    menu.init();
+    menu.bindGameEvents();
   };
 
   const ui = UIcontroller(startGame);
+  menu = MenuConroller(game);
 
   const start = () => {
     ui.init();
+    menu.init();
   };
   return { start };
 })();

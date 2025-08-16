@@ -1,8 +1,11 @@
 import { gameBoardFactory } from "./gameBoardFactory";
 
 export const MenuConroller = (gameBoard) => {
-  const gameRulesBtn = document.querySelector("#game-rules-btn");
+  const gameRulesBtn = document.getElementById("game-rules-btn");
+
   const checkBtn = document.querySelector(".close-rules-btn");
+  console.log(checkBtn);
+
   const menuBtn = document.querySelector(".game-info-menu");
   const continueBtn = document.getElementById("resume-btn");
   const restartBtns = document.querySelectorAll(".restart-btn");
@@ -54,8 +57,13 @@ export const MenuConroller = (gameBoard) => {
     returnToHomeScreen();
   };
 
-  const bindEvents = () => {
+  const bindGlobalEvents = () => {
+    // events that should always work, even on the home screen
     gameRulesBtn.addEventListener("click", toggleBoxes);
+  };
+
+  const bindGameEvents = () => {
+    // events that only make sense once a game is running
     menuBtn.addEventListener("click", bringMenu);
     checkBtn.addEventListener("click", toggleBoxes);
     continueBtn.addEventListener("click", resumeGame);
@@ -68,7 +76,10 @@ export const MenuConroller = (gameBoard) => {
 
   return {
     init: () => {
-      bindEvents();
+      bindGlobalEvents();
+    },
+    bindGameEvents: () => {
+      bindGameEvents();
     },
   };
 };

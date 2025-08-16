@@ -401,3 +401,46 @@ body {
   font-size: 2rem;
   font-weight: 600;
 }
+
+.disable {
+  pointer-events: none;
+}
+
+#winning-board-container {
+  display: flex;
+  justify-content: center;
+}
+
+.winning-board {
+  background-color: #fff;
+  width: 150px;
+  z-index: 3;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 10px;
+  border-radius: 10px;
+}
+.player-winner,
+.winner-message,
+.reset-btn {
+  text-transform: uppercase;
+}
+
+.player-winner {
+  font-size: 0.675rem;
+  font-weight: 700;
+}
+.winner-message {
+  font-size: 1.85rem;
+  font-weight: 800;
+}
+.reset-btn {
+  border: none;
+  background-color: #fd6687;
+  color: #fff;
+  font-size: 0.675rem;
+  padding: 5px 10px;
+  border-radius: 15px;
+}

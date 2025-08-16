@@ -24,6 +24,7 @@ export function gameBoardFactory(
     () => {
       const oponent = currentPlayer === "P1" ? "P2" : "P1";
       declareWinner(oponent);
+      document.getElementById("play-timer").textContent = `30s`;
     },
     (timeLeft) => {
       document.getElementById("play-timer").textContent = `${timeLeft}s`;
@@ -58,7 +59,35 @@ export function gameBoardFactory(
   };
 
   const declareWinner = (winner) => {
-    alert(winner + "is the winner");
+    const winningBoardCont = document.getElementById("winning-board-container");
+    const turnContainer = document.querySelector(".turn-background-container");
+
+    container.classList.add("disable");
+
+    const winningBoard = document.createElement("div");
+    winningBoard.classList.add("winning-board", "box-shadow-black");
+
+    const playerWinner = document.createElement("p");
+    playerWinner.classList.add("player-winner");
+    playerWinner.textContent = winner === "P1" ? "Player 1" : "Player 2";
+
+    const winnerMessage = document.createElement("p");
+    winnerMessage.classList.add("winner-message");
+    winnerMessage.textContent = "wins";
+
+    const resetBtn = document.createElement("button");
+    resetBtn.classList.add("reset-btn");
+    resetBtn.textContent = "Play Again";
+    resetBtn.addEventListener("click", () => {
+      turnContainer.remove();
+      clearBoardUI();
+      clearBoardState();
+      startTime();
+    });
+
+    winningBoard.append(playerWinner, winnerMessage, resetBtn);
+    turnContainer.remove();
+    winningBoardCont.appendChild(winningBoard);
   };
 
   const moveMarker = (col) => {

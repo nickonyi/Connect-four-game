@@ -5,7 +5,8 @@ export const MenuConroller = (gameBoard) => {
   const checkBtn = document.querySelector(".close-rules-btn");
   const menuBtn = document.querySelector(".game-info-menu");
   const continueBtn = document.getElementById("resume-btn");
-  const restartBtn = document.getElementById("restart-btn");
+  const restartBtns = document.querySelectorAll(".restart-btn");
+
   const quitBtn = document.getElementById("quit-btn");
   const marker = document.getElementById("player-indicator");
   const { resetBoard } = gameBoardFactory(marker);
@@ -23,8 +24,11 @@ export const MenuConroller = (gameBoard) => {
     }
   };
 
-  const resumeGame = () => {
+  const close = () => {
     document.querySelector(".modal").style.display = "none";
+  };
+  const resumeGame = () => {
+    close();
     gameBoard.resumeTime();
   };
 
@@ -34,7 +38,9 @@ export const MenuConroller = (gameBoard) => {
   };
 
   const restartGame = () => {
-    resetBoard(true);
+    gameBoard.stopTime();
+    gameBoard.resetBoard(true);
+    close();
   };
 
   const returnToHomeScreen = () => {
@@ -53,8 +59,11 @@ export const MenuConroller = (gameBoard) => {
     menuBtn.addEventListener("click", bringMenu);
     checkBtn.addEventListener("click", toggleBoxes);
     continueBtn.addEventListener("click", resumeGame);
-    restartBtn.addEventListener("click", restartGame);
     quitBtn.addEventListener("click", quitGame);
+
+    restartBtns.forEach((btn) => {
+      btn.addEventListener("click", restartGame);
+    });
   };
 
   return {

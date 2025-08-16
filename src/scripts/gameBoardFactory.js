@@ -15,8 +15,8 @@ export function gameBoardFactory(
   const rowYMultipliers = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
   let scores = { P1: 0, P2: 0 };
   const board = boardFactory(6, 7);
-  const { checkWin } = winChecker(board);
-  const gameBoard = board.getState();
+  let checkWin = winChecker(board).checkWin;
+  let gameBoard = board.getState();
 
   //timer function
   const turnTimer = TimeController(
@@ -79,14 +79,17 @@ export function gameBoardFactory(
     resetBtn.classList.add("reset-btn");
     resetBtn.textContent = "Play Again";
     resetBtn.addEventListener("click", () => {
-      turnContainer.remove();
+      turnContainer.classList.remove("hide");
+      winningBoard.classList.add("hide");
+
       clearBoardUI();
       clearBoardState();
       startTime();
+      container.classList.remove("disable");
     });
 
     winningBoard.append(playerWinner, winnerMessage, resetBtn);
-    turnContainer.remove();
+    turnContainer.classList.add("hide");
     winningBoardCont.appendChild(winningBoard);
   };
 
@@ -103,6 +106,8 @@ export function gameBoardFactory(
     if (dropRow === null) return;
     gameBoard[dropRow][col] = currentPlayer;
     drawPiece(dropRow, col, currentPlayer);
+    console.log(gameBoard);
+    console.log(checkWin(currentPlayer));
 
     if (checkWin(currentPlayer)) {
       stopTime();
@@ -188,6 +193,8 @@ export function gameBoardFactory(
 
   const clearBoardState = () => {
     board.clear();
+    gameBoard = board.getState();
+    checkWin = winChecker(board).checkWin;
     currentPlayer = "P1";
     marker.querySelector("img").src = piecesAsset.markerP1;
     document.getElementById("player-turn-text").textContent = "Player 1's turn";

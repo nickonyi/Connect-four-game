@@ -25,7 +25,7 @@ export function gameBoardFactory(
     () => {
       const oponent = currentPlayer === "P1" ? "P2" : "P1";
       declareWinner(oponent);
-      updateScores();
+      updateScores(oponent);
       document.getElementById("play-timer").textContent = `30s`;
     },
     (timeLeft) => {
@@ -80,11 +80,17 @@ export function gameBoardFactory(
   };
 
   const removeWinMessage = () => {
-    document.querySelector(".turn-background-container").remove("hide");
-    document.querySelector(".winning-board").add("hide");
+    document
+      .querySelector(".turn-background-container")
+      .classList.remove("hide");
+    document.querySelector(".winning-board").classList.add("hide");
+    container.classList.remove("disable");
   };
 
   const declareWinner = (winner) => {
+    const old = document.querySelector(".winning-board");
+    if (old) old.remove();
+
     const winningBoardCont = document.getElementById("winning-board-container");
     const turnContainer = document.querySelector(".turn-background-container");
 
@@ -234,6 +240,7 @@ export function gameBoardFactory(
     clearBoardUI();
     clearBoardState();
     resetScores();
+    removeWinMessage();
 
     if (shouldStartTimer) {
       startTime();

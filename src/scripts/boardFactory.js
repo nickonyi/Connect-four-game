@@ -4,9 +4,7 @@ export const boardFactory = (rows, cols) => {
     .map(() => Array(cols).fill(null));
 
   const clear = () => {
-    state = Array(rows)
-      .fill(null)
-      .map(() => Array(cols).fill(null));
+    state = Array.from({ length: rows }, () => Array(cols).fill(null));
   };
 
   const getState = () => state;

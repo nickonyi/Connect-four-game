@@ -60,12 +60,20 @@ export function gameBoardFactory(
     const zones = document.querySelectorAll(".click-zone");
     zones.forEach((zone) => {
       const col = parseInt(zone.dataset.col, 10);
+
+      // first clear old listeners
+      zone.replaceWith(zone.cloneNode(true));
+    });
+
+    document.querySelectorAll(".click-zone").forEach((zone) => {
+      const col = parseInt(zone.dataset.col, 10);
       zone.addEventListener("mouseenter", () => moveMarker(col));
       zone.addEventListener("click", () => handleColumnClick(col));
     });
 
     startTime();
   };
+
   const updateScoresinUi = () => {
     document.getElementById("score-p1").textContent = scores.P1;
     document.getElementById("score-p2").textContent = scores.P2;
@@ -143,6 +151,7 @@ export function gameBoardFactory(
     drawPiece(dropRow, col, currentPlayer);
 
     if (checkWin(currentPlayer)) {
+      console.log("Click fired for col:", col);
       stopTime();
       updateScores(currentPlayer);
       declareWinner(currentPlayer);
@@ -223,6 +232,8 @@ export function gameBoardFactory(
 
   const clearBoardState = () => {
     board.clear();
+    console.log("state after clearing", board.getState());
+
     gameBoard = board.getState();
     checkWin = winChecker(board).checkWin;
     currentPlayer = "P1";

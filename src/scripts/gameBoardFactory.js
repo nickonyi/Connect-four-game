@@ -11,7 +11,8 @@ export function gameBoardFactory(
 ) {
   const ROWS = 6;
   const COLS = 7;
-  let currentPlayer = "P1";
+  let startingPlayer = "P1";
+  let currentPlayer = startingPlayer;
   const rowYMultipliers = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
   let scores = { P1: 0, P2: 0 };
   const board = boardFactory(6, 7);
@@ -24,6 +25,7 @@ export function gameBoardFactory(
     () => {
       const oponent = currentPlayer === "P1" ? "P2" : "P1";
       declareWinner(oponent);
+      updateScores();
       document.getElementById("play-timer").textContent = `30s`;
     },
     (timeLeft) => {
@@ -45,6 +47,13 @@ export function gameBoardFactory(
 
   const resumeTime = () => {
     turnTimer.resume();
+  };
+
+  const markerUpdater = () => {
+    marker.querySelector("img").src =
+      currentPlayer === "P1" ? piecesAsset.markerP1 : piecesAsset.markerP2;
+    document.getElementById("player-turn-text").textContent =
+      currentPlayer === "P1" ? `Player 1's turn` : "Player 2's turn";
   };
 
   const init = () => {
@@ -95,6 +104,9 @@ export function gameBoardFactory(
       clearBoardUI();
       clearBoardState();
       startTime();
+      startingPlayer = startingPlayer === "P1" ? "P2" : "P1";
+      currentPlayer = startingPlayer;
+      markerUpdater();
       container.classList.remove("disable");
     });
 
@@ -157,11 +169,7 @@ export function gameBoardFactory(
     } else if (mode === "pvc") {
       currentPlayer = currentPlayer === "cpu" ? "P1" : "cpu";
     }
-
-    marker.querySelector("img").src =
-      currentPlayer === "P1" ? piecesAsset.markerP1 : piecesAsset.markerP2;
-    document.getElementById("player-turn-text").textContent =
-      currentPlayer === "P1" ? `Player 1's turn` : "Player 2's turn";
+    markerUpdater();
     startTime();
   };
 

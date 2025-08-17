@@ -54,6 +54,20 @@ export function gameBoardFactory(
       currentPlayer === "P1" ? piecesAsset.markerP1 : piecesAsset.markerP2;
     document.getElementById("player-turn-text").textContent =
       currentPlayer === "P1" ? `Player 1's turn` : "Player 2's turn";
+
+    const turnContainer = document.querySelector(".turn-background-container");
+    turnContainer.querySelector("img").src =
+      currentPlayer === "P2" ? piecesAsset.imgYellow : piecesAsset.imgRed;
+
+    // update background + text color via CSS classes
+    turnContainer
+      .querySelector(".text-overlay")
+      .classList.remove("pink", "yellow");
+    if (currentPlayer === "P1") {
+      turnContainer.querySelector(".text-overlay").classList.add("pink");
+    } else {
+      turnContainer.querySelector(".text-overlay").classList.add("yellow");
+    }
   };
 
   const init = () => {
@@ -127,6 +141,7 @@ export function gameBoardFactory(
       startTime();
       startingPlayer = startingPlayer === "P1" ? "P2" : "P1";
       currentPlayer = startingPlayer;
+
       markerUpdater();
       container.classList.remove("disable");
     });

@@ -449,3 +449,10 @@ body {
 .hide {
   display: none;
 }
+
+.yellow {
+  color: #000000;
+}
+.pink {
+  color: #fff;
+}

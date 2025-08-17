@@ -58,6 +58,16 @@ export function gameBoardFactory(
     startTime();
   };
 
+  const updateScores = () => {
+    if (currentPlayer === "P1") {
+      scores.P1 += 1;
+    } else {
+      scores.P2 += 1;
+    }
+    document.getElementById("score-p1").textContent = scores.P1;
+    document.getElementById("score-p2").textContent = scores.P2;
+  };
+
   const declareWinner = (winner) => {
     const winningBoardCont = document.getElementById("winning-board-container");
     const turnContainer = document.querySelector(".turn-background-container");
@@ -109,6 +119,7 @@ export function gameBoardFactory(
 
     if (checkWin(currentPlayer)) {
       stopTime();
+      updateScores();
       declareWinner(currentPlayer);
       return;
     }
@@ -200,12 +211,14 @@ export function gameBoardFactory(
 
   const resetScores = () => {
     scores = { P1: 0, P2: 0 };
+    updateScores();
   };
 
   const resetBoard = (shouldStartTimer = false) => {
     stopTime();
     clearBoardUI();
     clearBoardState();
+    resetScores();
 
     if (shouldStartTimer) {
       startTime();

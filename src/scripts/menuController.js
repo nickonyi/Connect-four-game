@@ -60,12 +60,12 @@ export const MenuConroller = (gameBoard) => {
   const bindGlobalEvents = () => {
     // events that should always work, even on the home screen
     gameRulesBtn.addEventListener("click", toggleBoxes);
+    checkBtn.addEventListener("click", toggleBoxes);
   };
 
   const bindGameEvents = () => {
     // events that only make sense once a game is running
     menuBtn.addEventListener("click", bringMenu);
-    checkBtn.addEventListener("click", toggleBoxes);
     continueBtn.addEventListener("click", resumeGame);
     quitBtn.addEventListener("click", quitGame);
 

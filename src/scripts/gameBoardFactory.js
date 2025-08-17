@@ -66,15 +66,22 @@ export function gameBoardFactory(
 
     startTime();
   };
-
-  const updateScores = () => {
-    if (currentPlayer === "P1") {
+  const updateScoresinUi = () => {
+    document.getElementById("score-p1").textContent = scores.P1;
+    document.getElementById("score-p2").textContent = scores.P2;
+  };
+  const updateScores = (winner) => {
+    if (winner === "P1") {
       scores.P1 += 1;
     } else {
       scores.P2 += 1;
     }
-    document.getElementById("score-p1").textContent = scores.P1;
-    document.getElementById("score-p2").textContent = scores.P2;
+    updateScoresinUi();
+  };
+
+  const removeWinMessage = () => {
+    document.querySelector(".turn-background-container").remove("hide");
+    document.querySelector(".winning-board").add("hide");
   };
 
   const declareWinner = (winner) => {
@@ -131,7 +138,7 @@ export function gameBoardFactory(
 
     if (checkWin(currentPlayer)) {
       stopTime();
-      updateScores();
+      updateScores(currentPlayer);
       declareWinner(currentPlayer);
       return;
     }
@@ -219,7 +226,7 @@ export function gameBoardFactory(
 
   const resetScores = () => {
     scores = { P1: 0, P2: 0 };
-    updateScores();
+    updateScoresinUi();
   };
 
   const resetBoard = (shouldStartTimer = false) => {

@@ -13,7 +13,6 @@ export const winChecker = (board) => {
           gameBoard[r][c + 2] === player &&
           gameBoard[r][c + 3] === player
         ) {
-          console.log("hor win");
           return true;
         }
       }
@@ -28,7 +27,6 @@ export const winChecker = (board) => {
           gameBoard[r + 2][c] === player &&
           gameBoard[r + 3][c] === player
         ) {
-          console.log("ver win");
           return true;
         }
       }
@@ -43,7 +41,6 @@ export const winChecker = (board) => {
           gameBoard[r + 2][c + 2] === player &&
           gameBoard[r + 3][c + 3] === player
         ) {
-          console.log("diag down-right win");
           return true;
         }
       }
@@ -58,7 +55,6 @@ export const winChecker = (board) => {
           gameBoard[r + 2][c - 2] === player &&
           gameBoard[r + 3][c - 3] === player
         ) {
-          console.log("diag down-left win");
           return true;
         }
       }

@@ -2,10 +2,7 @@ import { gameBoardFactory } from "./gameBoardFactory";
 
 export const MenuConroller = (gameBoard) => {
   const gameRulesBtn = document.getElementById("game-rules-btn");
-
   const checkBtn = document.querySelector(".close-rules-btn");
-  console.log(checkBtn);
-
   const menuBtn = document.querySelector(".game-info-menu");
   const continueBtn = document.getElementById("resume-btn");
   const restartBtns = document.querySelectorAll(".restart-btn");
@@ -32,7 +29,7 @@ export const MenuConroller = (gameBoard) => {
   };
   const resumeGame = () => {
     close();
-    gameBoard.resumeTime();
+    gameBoard.resumeTime(true);
   };
 
   const bringMenu = () => {

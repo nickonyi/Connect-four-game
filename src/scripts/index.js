@@ -8,6 +8,7 @@ import imgRed from "../assets/images/turn-background-red.svg";
 import imgYellow from "../assets/images/turn-background-yellow.svg";
 import pieceRed from "../assets/images/counter-red-large.svg";
 import pieceYellow from "../assets/images/counter-yellow-large.svg";
+import { boardFactory } from "./boardFactory";
 
 // Game elements
 const boardContainer = document.querySelector(".player-board-container");
@@ -54,3 +55,10 @@ const App = (() => {
 })();
 
 App.start();
+
+const board = boardFactory(6,7);
+const boardo = board.getState()
+const newBoard = boardo.map(row => [...row])
+console.log(newBoard);
+console.log(newBoard[0]);
+

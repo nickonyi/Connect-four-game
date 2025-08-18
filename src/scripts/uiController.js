@@ -37,7 +37,7 @@ export const UIcontroller = (startGame) => {
       leftScoreboard.innerHTML = `
       <div class="player-box box-shadow-black">
         <div class="player-name">You</div>
-        <div class="player-score">0</div>
+        <div id="score-p1" class="player-score">0</div>
         <img src="${youIcon}" alt="" class="player-icon" />
       </div>
     `;
@@ -45,7 +45,7 @@ export const UIcontroller = (startGame) => {
       rightScoreboard.innerHTML = `
       <div class="player-box box-shadow-black">
         <div class="player-name">CPU</div>
-        <div class="player-score">0</div>
+        <div id="score-p2" class="player-score">0</div>
       <img src="${cpuIcon}" alt="" class="player-icon" />
       </div>
     `;

@@ -1,6 +1,7 @@
 import { TimeController } from "./timeController";
 import { winChecker } from "./winController";
 import { boardFactory } from "./boardFactory";
+import { aiFactory } from "./aiController";
 
 export function gameBoardFactory(
   container,
@@ -18,6 +19,7 @@ export function gameBoardFactory(
   const board = boardFactory(6, 7);
   let checkWin = winChecker(board).checkWin;
   let gameBoard = board.getState();
+  const AI = aiFactory(winChecker);
 
   //timer function
   const turnTimer = TimeController(
@@ -49,7 +51,7 @@ export function gameBoardFactory(
     turnTimer.resume();
   };
 
-  const markerUpdater = () => {
+  const updateMarkers = () => {
     marker.querySelector("img").src =
       currentPlayer === "P1" ? piecesAsset.markerP1 : piecesAsset.markerP2;
     document.getElementById("player-turn-text").textContent =
@@ -102,15 +104,34 @@ export function gameBoardFactory(
   };
 
   const removeWinMessage = () => {
-    const winningBoard =  document.querySelector(".winning-board");
+    const winningBoard = document.querySelector(".winning-board");
     document
       .querySelector(".turn-background-container")
       .classList.remove("hide");
-      if (winningBoard) {
-     winningBoard.classList.add("hide");
-      }
-   
+    if (winningBoard) {
+      winningBoard.classList.add("hide");
+    }
+
     container.classList.remove("disable");
+  };
+
+  const startNewRound = () => {
+    clearBoardUI();
+    clearBoardState();
+    startTime();
+    if (mode === "pvp") {
+      startingPlayer = startingPlayer === "P1" ? "P2" : "P1";
+      currentPlayer = startingPlayer;
+    } else if (mode === "pvc") {
+      startingPlayer = startingPlayer === "P1" ? "cpu" : "P1";
+      console.log(startingPlayer);
+
+      currentPlayer = startingPlayer;
+    }
+    updateMarkers();
+    if (currentPlayer === "cpu") {
+      cpuMove();
+    }
   };
 
   const declareWinner = (winner) => {
@@ -139,14 +160,8 @@ export function gameBoardFactory(
     resetBtn.addEventListener("click", () => {
       turnContainer.classList.remove("hide");
       winningBoard.classList.add("hide");
+      startNewRound();
 
-      clearBoardUI();
-      clearBoardState();
-      startTime();
-      startingPlayer = startingPlayer === "P1" ? "P2" : "P1";
-      currentPlayer = startingPlayer;
-
-      markerUpdater();
       container.classList.remove("disable");
     });
 
@@ -165,6 +180,7 @@ export function gameBoardFactory(
 
   const handleColumnClick = (col) => {
     const dropRow = findAvailableRow(col);
+
     if (dropRow === null) return;
     gameBoard[dropRow][col] = currentPlayer;
     drawPiece(dropRow, col, currentPlayer);
@@ -176,11 +192,9 @@ export function gameBoardFactory(
       return;
     }
 
-    if (mode === "pvc" && currentPlayer === "P1") {
-      currentPlayer = "cpu";
+    switchPlayer();
+    if (mode === "pvc" && currentPlayer === "cpu") {
       cpuMove();
-    } else {
-      switchPlayer();
     }
   };
 
@@ -192,15 +206,8 @@ export function gameBoardFactory(
   };
 
   const cpuMove = () => {
-    let col;
-    do {
-      col = Math.floor(Math.random() * COLS);
-    } while (findAvailableRow(col) === null);
-    {
-      setTimeout(() => {
-        handleColumnClick(col);
-      }, 500);
-    }
+    const col = AI.getMove(gameBoard, "cpu", "P1");
+    setTimeout(() => handleColumnClick(col), 500);
   };
 
   const switchPlayer = () => {
@@ -209,7 +216,7 @@ export function gameBoardFactory(
     } else if (mode === "pvc") {
       currentPlayer = currentPlayer === "cpu" ? "P1" : "cpu";
     }
-    markerUpdater();
+    updateMarkers();
     startTime();
   };
 
@@ -250,8 +257,6 @@ export function gameBoardFactory(
 
   const clearBoardState = () => {
     board.clear();
-    console.log("state after clearing", board.getState());
-
     gameBoard = board.getState();
     checkWin = winChecker(board).checkWin;
     currentPlayer = "P1";

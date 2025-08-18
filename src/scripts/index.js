@@ -55,10 +55,3 @@ const App = (() => {
 })();
 
 App.start();
-
-const board = boardFactory(6,7);
-const boardo = board.getState()
-const newBoard = boardo.map(row => [...row])
-console.log(newBoard);
-console.log(newBoard[0]);
-

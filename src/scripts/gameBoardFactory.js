@@ -102,10 +102,14 @@ export function gameBoardFactory(
   };
 
   const removeWinMessage = () => {
+    const winningBoard =  document.querySelector(".winning-board");
     document
       .querySelector(".turn-background-container")
       .classList.remove("hide");
-    document.querySelector(".winning-board").classList.add("hide");
+      if (winningBoard) {
+     winningBoard.classList.add("hide");
+      }
+   
     container.classList.remove("disable");
   };
 
@@ -166,7 +170,6 @@ export function gameBoardFactory(
     drawPiece(dropRow, col, currentPlayer);
 
     if (checkWin(currentPlayer)) {
-      console.log("Click fired for col:", col);
       stopTime();
       updateScores(currentPlayer);
       declareWinner(currentPlayer);

@@ -52,14 +52,24 @@ export function gameBoardFactory(
   };
 
   const updateMarkers = () => {
-    marker.querySelector("img").src =
-      currentPlayer === "P1" ? piecesAsset.markerP1 : piecesAsset.markerP2;
-    document.getElementById("player-turn-text").textContent =
-      currentPlayer === "P1" ? `Player 1's turn` : "Player 2's turn";
-
     const turnContainer = document.querySelector(".turn-background-container");
-    turnContainer.querySelector("img").src =
-      currentPlayer === "P2" ? piecesAsset.imgYellow : piecesAsset.imgRed;
+    if (mode === "pvp") {
+      marker.querySelector("img").src =
+        currentPlayer === "P1" ? piecesAsset.markerP1 : piecesAsset.markerP2;
+      document.getElementById("player-turn-text").textContent =
+        currentPlayer === "P1" ? `Player 1's turn` : "Player 2's turn";
+
+      turnContainer.querySelector("img").src =
+        currentPlayer === "P2" ? piecesAsset.imgYellow : piecesAsset.imgRed;
+    } else if (mode === "pvc") {
+      marker.querySelector("img").src =
+        currentPlayer === "P1" ? piecesAsset.markerP1 : piecesAsset.markerP2;
+      document.getElementById("player-turn-text").textContent =
+        currentPlayer === "P1" ? `Your turn` : "Cpu's turn";
+
+      turnContainer.querySelector("img").src =
+        currentPlayer === "cpu" ? piecesAsset.imgYellow : piecesAsset.imgRed;
+    }
 
     // update background + text color via CSS classes
     turnContainer

@@ -52,15 +52,23 @@ export const aiFactory = (winChecker) => {
     let bestCol = null;
 
     for (let col = 0; col < COLS; col++) {
+      console.log("center", center);
+      console.log("col", col);
+
       if (isValidMove(col)) {
+        console.log(isValidMove(col), "yes it is");
         let score = 3 - Math.abs(center - col);
+        console.log("score", score);
+        console.log("best score", score);
+
         if (score > bestScore) {
           bestScore = score;
           bestCol = col;
         }
       }
-      return bestCol;
     }
+    console.log("Best col", bestCol);
+    return bestCol;
   };
 
   return { getMove };

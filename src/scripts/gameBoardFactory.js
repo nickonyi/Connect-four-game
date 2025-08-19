@@ -158,11 +158,19 @@ export function gameBoardFactory(
 
     const playerWinner = document.createElement("p");
     playerWinner.classList.add("player-winner");
-    playerWinner.textContent = winner === "P1" ? "Player 1" : "Player 2";
+    playerWinner.textContent =
+      winner === "P1" && mode === "pvp"
+        ? "Player 1"
+        : winner === "P2"
+        ? "Player 2"
+        : winner === "cpu"
+        ? "CPU"
+        : "You";
 
     const winnerMessage = document.createElement("p");
     winnerMessage.classList.add("winner-message");
-    winnerMessage.textContent = "wins";
+    winnerMessage.textContent =
+      winner === "P1" && mode === "pvc" ? "win" : "wins";
 
     const resetBtn = document.createElement("button");
     resetBtn.classList.add("reset-btn");

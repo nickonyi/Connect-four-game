@@ -25,7 +25,12 @@ export function gameBoardFactory(
   const turnTimer = TimeController(
     30,
     () => {
-      const oponent = currentPlayer === "P1" ? "P2" : "P1";
+      const oponent =
+        currentPlayer && (mode === "pvp") === "P1"
+          ? "P2"
+          : currentPlayer === "P1" && mode === "pvc"
+          ? "cpu"
+          : "P2";
       declareWinner(oponent);
       updateScores(oponent);
       document.getElementById("play-timer").textContent = `30s`;

@@ -456,3 +456,38 @@ body {
 .pink {
   color: #fff;
 }
+
+@media (min-width: 600px) and (max-width: 1024px) {
+  body {
+    height: 850px;
+  }
+  .game-info {
+    justify-content: space-between;
+    padding: 20px 60px;
+  }
+  .tab {
+    inset: 0;
+  }
+  .game-info-player {
+    flex-direction: column;
+  }
+  .score-board {
+    display: inline-block;
+    width: 100px; /* adjust as needed */
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  .score-board.left,
+  .score-board.right {
+    order: -1;
+  }
+  .player-board-container {
+    order: 0;
+  }
+  .score-board.left,
+  .score-board.right {
+    display: inline-block;
+  }
+}

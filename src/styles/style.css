@@ -218,7 +218,7 @@ body {
   align-items: center;
   background-color: #7945ff;
   padding-top: 40px;
- height: 100vh;
+  height: 100vh;
 }
 
 .game-info {
@@ -253,11 +253,13 @@ body {
   align-items: center;
   gap: 16px;
 }
+.score-board {
+  position: relative;
+}
 
 .player-box {
   background-color: #fff;
   height: 100px;
-  position: relative;
   width: 100px;
   padding-inline: 15px;
   display: flex;
@@ -281,9 +283,9 @@ body {
   text-transform: uppercase;
 }
 .score-board {
-width: 100px; 
-    height: 100px;
-    text-align: center;
+  width: 100px;
+  height: 100px;
+  text-align: center;
 }
 .player-score {
   text-align: center;
@@ -472,26 +474,60 @@ width: 100px;
   .tab {
     inset: 0;
   }
- .game-info-player{
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  justify-content: space-between;
- }
- .score-board.left{
-  grid-column: 1;
-  grid-row: 1;
- }
- .score-board.right {
-  grid-column: 2;
-  grid-row: 1;
- }
- .player-box{
-  width: 100%;
- }
+  .game-info-player {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    justify-content: space-between;
+  }
+  .score-board.left {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .score-board.right {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .score-board.left,
+  .score-board.right {
+    width: 100%;
+  }
+  .score-board {
+    position: relative;
+    width: 200px;
+  }
+  #left-scoreboard .player-box,
+  #right-scoreboard .player-box {
+    width: 100%;
+    height: 80px;
+    align-items: center;
+  }
+  #left-scoreboard .player-box {
+    flex-direction: row;
+  }
+  #right-scoreboard .player-box {
+    flex-direction: row-reverse;
+  }
+  #left-scoreboard img,
+  #right-scoreboard img {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 
- .player-board-container {
-  grid-column: 1/span 2;
-  grid-row: 2;
-  width: 600px;
- } 
+  #left-scoreboard img {
+    left: 0;
+  }
+
+  #right-scoreboard img {
+    left: 190px;
+  }
+  .player-score {
+    font-size: 2rem;
+  }
+
+  .player-board-container {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    width: 600px;
+  }
 }

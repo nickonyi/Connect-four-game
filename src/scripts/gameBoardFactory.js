@@ -14,7 +14,8 @@ export function gameBoardFactory(
   const COLS = 7;
   let startingPlayer = "P1";
   let currentPlayer = startingPlayer;
-  const rowYMultipliers = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
+  const rowYMultipliersDesktop = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
+  const rowYMultipliersTablet = [0.15, 0.38, 0.62, 0.83, 1.04, 1.27];
   let scores = { P1: 0, P2: 0 };
   const board = boardFactory(6, 7);
   let checkWin = winChecker(board).checkWin;
@@ -139,8 +140,6 @@ export function gameBoardFactory(
       currentPlayer = startingPlayer;
     } else if (mode === "pvc") {
       startingPlayer = startingPlayer === "P1" ? "cpu" : "P1";
-      console.log(startingPlayer);
-
       currentPlayer = startingPlayer;
     }
     updateMarkers();
@@ -245,10 +244,19 @@ export function gameBoardFactory(
     startTime();
   };
 
+  const getRowYMultipliers = () => {
+    if (window.innerWidth >= 1024) {
+      return rowYMultipliersDesktop;
+    } else {
+      return rowYMultipliersTablet;
+    }
+  };
+
   const drawPiece = (row, col, player) => {
     const rect = container.getBoundingClientRect();
     const colWidth = rect.width / COLS;
     const pieceSize = colWidth * 0.94;
+    const rowYMultipliers = getRowYMultipliers();
 
     const centerX = col * colWidth + colWidth / 2;
     const centerY = rowYMultipliers[row] * rect.height;

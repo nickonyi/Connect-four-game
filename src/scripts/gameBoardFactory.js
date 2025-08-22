@@ -245,7 +245,7 @@ export function gameBoardFactory(
   };
 
   const getRowYMultipliers = () => {
-    if (window.innerWidth >= 1024) {
+    if (window.innerWidth >= 1025) {
       return rowYMultipliersDesktop;
     } else {
       return rowYMultipliersTablet;

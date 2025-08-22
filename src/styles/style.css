@@ -444,7 +444,7 @@ body {
 }
 .reset-btn {
   border: none;
-  background-color: #fd6687;
+  background-color: #5c2dd5;
   color: #fff;
   font-size: 0.675rem;
   padding: 5px 10px;
@@ -463,7 +463,7 @@ body {
   color: #fff;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1024px) {
   body {
     height: 850px;
   }
@@ -478,6 +478,9 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     justify-content: space-between;
+  }
+  .game-info-btn {
+    font-size: 1.2rem;
   }
   .score-board.left {
     grid-column: 1;
@@ -500,6 +503,7 @@ body {
     width: 100%;
     height: 80px;
     align-items: center;
+    gap: 100px;
   }
   #left-scoreboard .player-box {
     flex-direction: row;
@@ -511,6 +515,8 @@ body {
   #right-scoreboard img {
     position: absolute;
     top: 50%;
+    width: 50px;
+    height: 50px;
     transform: translate(-50%, -50%);
   }
 
@@ -522,7 +528,11 @@ body {
     left: 315px;
   }
   .player-score {
-    font-size: 2rem;
+    font-size: 4em;
+  }
+  .player-name {
+    margin: 0;
+    font-size: 1.5rem;
   }
 
   .player-board-container {

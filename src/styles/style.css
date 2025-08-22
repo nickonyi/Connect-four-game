@@ -467,6 +467,12 @@ body {
 .pink {
   color: #fff;
 }
+.yellow-bg {
+  background-color: #ffce67;
+}
+.pink-bg {
+  background-color: #fd6687;
+}
 
 @media (max-width: 1024px) {
   body {

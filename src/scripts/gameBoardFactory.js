@@ -154,8 +154,18 @@ export function gameBoardFactory(
 
     const winningBoardCont = document.getElementById("winning-board-container");
     const turnContainer = document.querySelector(".turn-background-container");
+    const gameBoardFooter = document.querySelector(".game-board-footer");
 
     container.classList.add("disable");
+    gameBoardFooter.classList.add(
+      winner === "P1" && mode == "pvp"
+        ? "pink-bg"
+        : winner === "P1" && mode === "pvc"
+        ? "pink-bg"
+        : winner === "P2"
+        ? "yellow-bg"
+        : "yellow-bg"
+    );
 
     const winningBoard = document.createElement("div");
     winningBoard.classList.add("winning-board", "box-shadow-black");
@@ -182,6 +192,7 @@ export function gameBoardFactory(
     resetBtn.addEventListener("click", () => {
       turnContainer.classList.remove("hide");
       winningBoard.classList.add("hide");
+      gameBoardFooter.classList.remove("pink-bg", "yellow-bg");
       startNewRound();
 
       container.classList.remove("disable");

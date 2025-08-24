@@ -31,7 +31,7 @@ export function gameBoardFactory(
           : currentPlayer === "P1" && mode === "pvc"
           ? "cpu"
           : "P2";
-      declareWinner(oponent);
+      declareGameOver({ result: "win", winner: oponent });
       updateScores(oponent);
       document.getElementById("play-timer").textContent = `30s`;
     },
@@ -87,7 +87,17 @@ export function gameBoardFactory(
     }
   };
 
+  const startMode = () => {
+    const startText = document.getElementById("player-turn-text");
+    if (mode === "pvp") {
+      startText.textContent = "Player 1's turn";
+    } else {
+      startText.textContent = "Your turn";
+    }
+  };
+
   const init = () => {
+    startMode();
     const zones = document.querySelectorAll(".click-zone");
     zones.forEach((zone) => {
       const col = parseInt(zone.dataset.col, 10);

@@ -101,15 +101,6 @@ export function gameBoardFactory(
       zone.addEventListener("mouseenter", () => moveMarker(col));
       zone.addEventListener("click", () => handleColumnClick(col));
     });
-    const limit = 600;
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > limit) {
-        console.log(window.scrollY);
-
-        window.scrollTo(0, limit);
-      }
-    });
 
     startTime();
   };
@@ -302,8 +293,8 @@ export function gameBoardFactory(
     board.clear();
     gameBoard = board.getState();
     checkWin = winChecker(board).checkWin;
-    currentPlayer = "P1";
-    marker.querySelector("img").src = piecesAsset.markerP1;
+    currentPlayer = startingPlayer;
+    updateMarkers();
     document.getElementById("player-turn-text").textContent = "Player 1's turn";
   };
 

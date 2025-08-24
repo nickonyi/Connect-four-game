@@ -215,7 +215,7 @@ body {
 }
 
 .box-shadow-black {
-  box-shadow: 0 0 0 2px black, 0 7px 0 2px black;
+  box-shadow: 0 0 0 2px black, 0 10px 0 2px black;
 }
 
 /* Player Board CSS */
@@ -562,8 +562,9 @@ body {
 
 @media (max-width: 420px) {
   body {
-    height: 650px;
+    min-height: 650px;
     width: 100%;
+    overflow-y: auto;
   }
   #home-screen {
     width: 100%;
@@ -622,7 +623,7 @@ body {
     padding-left: 40px;
   }
   #right-scoreboard {
-    padding-right: 30px;
+    padding-right: 40px;
   }
   #left-scoreboard .player-box,
   #right-scoreboard .player-box {
@@ -646,7 +647,7 @@ body {
   }
 
   #right-scoreboard img {
-    left: 160px;
+    left: 145px;
   }
 
   .player-score {
@@ -664,16 +665,26 @@ body {
     width: 100%;
     aspect-ratio: 1/1;
   }
+
+  .player-board-container img {
+    width: calc(100% - 20px);
+    margin: 0 10px;
+    display: block;
+  }
   .player-box {
     border-radius: 20px;
   }
-
-  .player-board-container img {
-    width: 100%;
-    padding: 0 10px;
+  .player-winner {
+    font-size: 1.5rem;
   }
   #player-indicator img {
     display: none;
+  }
+  .winning-board {
+    width: 300px;
+  }
+  .winner-message {
+    font-size: 3.5rem;
   }
   .game-board-footer {
     top: -70px;

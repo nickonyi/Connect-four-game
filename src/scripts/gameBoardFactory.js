@@ -15,7 +15,9 @@ export function gameBoardFactory(
   let startingPlayer = "P1";
   let currentPlayer = startingPlayer;
   const rowYMultipliersDesktop = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
-  const rowYMultipliersTablet = [0.15, 0.38, 0.62, 0.9, 1.12, 1.36];
+  const rowYMultipliersTablet = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
+  const rowYMultipliersMobile = [0.08, 0.22, 0.36, 0.5, 0.63, 0.75];
+
   let scores = { P1: 0, P2: 0 };
   const board = boardFactory(6, 7);
   let checkWin = winChecker(board).checkWin;
@@ -258,18 +260,29 @@ export function gameBoardFactory(
   const getRowYMultipliers = () => {
     if (window.innerWidth >= 1025) {
       return rowYMultipliersDesktop;
-    } else {
+    } else if (window.innerWidth >= 601) {
       return rowYMultipliersTablet;
+    } else {
+      return rowYMultipliersMobile;
     }
   };
 
   const drawPiece = (row, col, player) => {
     const rect = container.getBoundingClientRect();
-    const colWidth = rect.width / COLS;
-    const pieceSize = colWidth * 0.94;
+    const styles = getComputedStyle(container);
+    const paddingLeft = parseFloat(styles.paddingLeft) || 0;
+    const paddingRight = parseFloat(styles.paddingRight) || 0;
+    console.log(paddingLeft);
+    console.log(paddingRight);
+
+    const colWidth = (rect.width - paddingLeft - paddingRight) / COLS;
+
+    const rowHeight = rect.height / ROWS;
+    const pieceSize = Math.min(colWidth, rowHeight) * 0.95;
+
     const rowYMultipliers = getRowYMultipliers();
 
-    const centerX = col * colWidth + colWidth / 2;
+    const centerX = paddingLeft + col * colWidth + colWidth / 2;
     const centerY = rowYMultipliers[row] * rect.height;
 
     const left = centerX - pieceSize / 2;

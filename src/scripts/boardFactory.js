@@ -7,7 +7,11 @@ export const boardFactory = (rows, cols) => {
     state = Array.from({ length: rows }, () => Array(cols).fill(null));
   };
 
+  const isBoardFull = () => {
+    return state.every((row) => row.every((cell) => cell !== null));
+  };
+
   const getState = () => state;
 
-  return { clear, getState };
+  return { clear, getState, isBoardFull };
 };

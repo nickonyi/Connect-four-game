@@ -147,7 +147,7 @@ export function gameBoardFactory(
     }
   };
 
-  const declareWinner = (winner) => {
+  const declareGameOver = ({ result, winner = null }) => {
     const old = document.querySelector(".winning-board");
     if (old) old.remove();
 
@@ -156,34 +156,45 @@ export function gameBoardFactory(
     const gameBoardFooter = document.querySelector(".game-board-footer");
 
     container.classList.add("disable");
-    gameBoardFooter.classList.add(
-      winner === "P1" && mode == "pvp"
-        ? "pink-bg"
-        : winner === "P1" && mode === "pvc"
-        ? "pink-bg"
-        : winner === "P2"
-        ? "yellow-bg"
-        : "yellow-bg"
-    );
+
+    // background color only if there's a winner
+    if (winner) {
+      gameBoardFooter.classList.add(
+        winner === "P1" && mode === "pvp"
+          ? "pink-bg"
+          : winner === "P1" && mode === "pvc"
+          ? "pink-bg"
+          : winner === "P2"
+          ? "yellow-bg"
+          : "yellow-bg"
+      );
+    }
 
     const winningBoard = document.createElement("div");
     winningBoard.classList.add("winning-board", "box-shadow-black");
 
     const playerWinner = document.createElement("p");
     playerWinner.classList.add("player-winner");
-    playerWinner.textContent =
-      winner === "P1" && mode === "pvp"
-        ? "Player 1"
-        : winner === "P2"
-        ? "Player 2"
-        : winner === "cpu"
-        ? "CPU"
-        : "You";
 
     const winnerMessage = document.createElement("p");
     winnerMessage.classList.add("winner-message");
-    winnerMessage.textContent =
-      winner === "P1" && mode === "pvc" ? "win" : "wins";
+
+    if (result === "win") {
+      playerWinner.textContent =
+        winner === "P1" && mode === "pvp"
+          ? "Player 1"
+          : winner === "P2"
+          ? "Player 2"
+          : winner === "cpu"
+          ? "CPU"
+          : "You";
+
+      winnerMessage.textContent =
+        winner === "P1" && mode === "pvc" ? "win" : "wins";
+    } else if (result === "stalemate") {
+      playerWinner.textContent = "No Winner";
+      winnerMessage.textContent = "Draw";
+    }
 
     const resetBtn = document.createElement("button");
     resetBtn.classList.add("reset-btn");
@@ -220,7 +231,14 @@ export function gameBoardFactory(
     if (checkWin(currentPlayer)) {
       stopTime();
       updateScores(currentPlayer);
-      declareWinner(currentPlayer);
+      declareGameOver({ result: "win", winner: currentPlayer });
+      return;
+    }
+
+    //check for stalemete
+    if (board.isBoardFull()) {
+      stopTime();
+      declareGameOver({ result: "stalemate" });
       return;
     }
 

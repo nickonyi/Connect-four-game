@@ -262,9 +262,6 @@ body {
   column-gap: 50px;
   row-gap: 30px;
 }
-.score-board {
-  position: relative;
-}
 
 .player-box {
   background-color: #fff;
@@ -276,6 +273,7 @@ body {
   justify-content: center;
   gap: 2px;
   border-radius: 15px;
+  position: relative;
 }
 .player-icon {
   width: 40px;
@@ -508,7 +506,6 @@ body {
     width: 100%;
   }
   .score-board {
-    position: relative;
     width: 200px;
   }
   #left-scoreboard .player-box,
@@ -598,6 +595,9 @@ body {
     grid-template-rows: auto auto;
     justify-content: space-between;
     width: 100%;
+    column-gap: 20px;
+    row-gap: 20px;
+    margin-top: 40px;
   }
   .game-info-btn {
     font-size: 0.875rem;
@@ -616,31 +616,28 @@ body {
     width: 100%;
   }
   .score-board {
-    position: relative;
     width: 100px;
   }
-  #left-scoreboard,
+  #left-scoreboard {
+    padding-left: 40px;
+  }
   #right-scoreboard {
-    padding: 0 20px;
+    padding-right: 30px;
   }
   #left-scoreboard .player-box,
   #right-scoreboard .player-box {
     height: 80px;
     width: 100%;
     align-items: center;
+    flex-direction: column;
   }
-  #left-scoreboard .player-box {
-    flex-direction: row;
-  }
-  #right-scoreboard .player-box {
-    flex-direction: row-reverse;
-  }
+
   #left-scoreboard img,
   #right-scoreboard img {
     position: absolute;
     top: 50%;
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     transform: translate(-50%, -50%);
   }
 
@@ -649,15 +646,16 @@ body {
   }
 
   #right-scoreboard img {
-    right: 0;
+    left: 160px;
   }
 
   .player-score {
-    font-size: 0.875rem;
+    font-size: 2.2rem;
+    font-weight: 800;
   }
   .player-name {
     margin: 0;
-    font-size: 0.5rem;
+    font-size: 1rem;
   }
 
   .player-board-container {
@@ -666,14 +664,16 @@ body {
     width: 100%;
     aspect-ratio: 1/1;
   }
+  .player-box {
+    border-radius: 20px;
+  }
 
   .player-board-container img {
     width: 100%;
     padding: 0 10px;
   }
   #player-indicator img {
-    width: 40px;
-    height: auto;
+    display: none;
   }
   .game-board-footer {
     top: -70px;

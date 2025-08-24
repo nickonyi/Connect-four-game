@@ -476,7 +476,8 @@ body {
 
 @media (min-width: 768px) and (max-width: 1024px) {
   body {
-    height: 850px;
+    max-height: 650px;
+    overflow-y: auto;
   }
   .game-info {
     justify-content: space-between;
@@ -560,9 +561,9 @@ body {
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 430px) {
   body {
-    min-height: 650px;
+    max-height: 650px;
     width: 100%;
     overflow-y: auto;
   }
@@ -628,7 +629,7 @@ body {
   #left-scoreboard .player-box,
   #right-scoreboard .player-box {
     height: 80px;
-    width: 100%;
+    width: 150px;
     align-items: center;
     flex-direction: column;
   }
@@ -662,12 +663,12 @@ body {
   .player-board-container {
     grid-column: 1 / span 2;
     grid-row: 2;
-    width: 100%;
+    width: calc(100% - 20px);
     aspect-ratio: 1/1;
   }
 
   .player-board-container img {
-    width: calc(100% - 20px);
+    width: 100%;
     margin: 0 10px;
     display: block;
   }
@@ -675,21 +676,57 @@ body {
     border-radius: 20px;
   }
   .player-winner {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
   #player-indicator img {
     display: none;
   }
   .winning-board {
-    width: 300px;
+    width: 250px;
   }
   .winner-message {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
   }
   .game-board-footer {
     top: -70px;
     width: 100%;
     height: 500px;
     padding-bottom: 250px;
+  }
+}
+
+@media (max-width: 380px) {
+  .player-board-container {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    width: 340px;
+    aspect-ratio: 1/1;
+  }
+
+  .player-board-container img {
+    width: 100%;
+    margin-left: 10px;
+    display: block;
+  }
+  #left-scoreboard {
+    padding-left: 28px;
+  }
+  #right-scoreboard {
+    padding-right: 20px;
+  }
+
+  #left-scoreboard img,
+  #right-scoreboard img {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    transform: translate(-50%, -50%);
+  }
+  .game-info-player {
+    column-gap: 10px;
+  }
+  .game-board-footer {
+    top: -50px;
   }
 }

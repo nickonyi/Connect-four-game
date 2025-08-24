@@ -14,10 +14,7 @@ export function gameBoardFactory(
   const COLS = 7;
   let startingPlayer = "P1";
   let currentPlayer = startingPlayer;
-  const rowYMultipliersDesktop = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
-  const rowYMultipliersTablet = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
-  const rowYMultipliersMobile = [0.08, 0.22, 0.36, 0.5, 0.63, 0.75];
-
+  const rowYMultipliers = [0.08, 0.22, 0.36, 0.5, 0.63, 0.78];
   let scores = { P1: 0, P2: 0 };
   const board = boardFactory(6, 7);
   let checkWin = winChecker(board).checkWin;
@@ -103,6 +100,15 @@ export function gameBoardFactory(
       const col = parseInt(zone.dataset.col, 10);
       zone.addEventListener("mouseenter", () => moveMarker(col));
       zone.addEventListener("click", () => handleColumnClick(col));
+    });
+    const limit = 600;
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > limit) {
+        console.log(window.scrollY);
+
+        window.scrollTo(0, limit);
+      }
     });
 
     startTime();
@@ -257,32 +263,12 @@ export function gameBoardFactory(
     startTime();
   };
 
-  const getRowYMultipliers = () => {
-    if (window.innerWidth >= 1025) {
-      return rowYMultipliersDesktop;
-    } else if (window.innerWidth >= 601) {
-      return rowYMultipliersTablet;
-    } else {
-      return rowYMultipliersMobile;
-    }
-  };
-
   const drawPiece = (row, col, player) => {
     const rect = container.getBoundingClientRect();
-    const styles = getComputedStyle(container);
-    const paddingLeft = parseFloat(styles.paddingLeft) || 0;
-    const paddingRight = parseFloat(styles.paddingRight) || 0;
-    console.log(paddingLeft);
-    console.log(paddingRight);
+    const colWidth = rect.width / COLS;
+    const pieceSize = colWidth * 0.94;
 
-    const colWidth = (rect.width - paddingLeft - paddingRight) / COLS;
-
-    const rowHeight = rect.height / ROWS;
-    const pieceSize = Math.min(colWidth, rowHeight) * 0.95;
-
-    const rowYMultipliers = getRowYMultipliers();
-
-    const centerX = paddingLeft + col * colWidth + colWidth / 2;
+    const centerX = col * colWidth + colWidth / 2;
     const centerY = rowYMultipliers[row] * rect.height;
 
     const left = centerX - pieceSize / 2;

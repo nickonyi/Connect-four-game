@@ -252,10 +252,12 @@ export function gameBoardFactory(
     }px`;
   };
 
+  let isDropping = false;
   const handleColumnClick = (col) => {
     const dropRow = findAvailableRow(col);
     if (dropRow === null) return;
 
+    isDropping = true;
     gameBoard[dropRow][col] = currentPlayer;
 
     const piece = drawPiece(dropRow, col, currentPlayer);
@@ -279,6 +281,7 @@ export function gameBoardFactory(
         return;
       }
       switchPlayer();
+      isDropping = false;
       if (mode === "pvc" && currentPlayer === "cpu") {
         cpuMove();
       }

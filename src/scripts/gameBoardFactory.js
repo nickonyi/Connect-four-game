@@ -358,6 +358,9 @@ export function gameBoardFactory(
     checkWin = winChecker(board).checkWin;
     currentPlayer = startingPlayer;
     updateMarkers();
+    document
+      .querySelectorAll(".highlight-circle")
+      .forEach((circle) => circle.remove());
     document.getElementById("player-turn-text").textContent = "Player 1's turn";
   };
 

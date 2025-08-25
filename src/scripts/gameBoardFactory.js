@@ -254,6 +254,7 @@ export function gameBoardFactory(
 
   let isDropping = false;
   const handleColumnClick = (col) => {
+    if (isDropping) return;
     const dropRow = findAvailableRow(col);
     if (dropRow === null) return;
 
@@ -272,12 +273,14 @@ export function gameBoardFactory(
         highlightWinningDiscs(winningCoords);
         updateScores(currentPlayer);
         declareGameOver({ result: "win", winner: currentPlayer });
+        isDropping = false;
         return;
       }
 
       if (board.isBoardFull()) {
         stopTime();
         declareGameOver({ result: "stalemate" });
+        isDropping = false;
         return;
       }
       switchPlayer();

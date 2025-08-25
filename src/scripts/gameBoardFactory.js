@@ -241,8 +241,6 @@ export function gameBoardFactory(
       circle.style.left = `${centerX}px`;
       circle.style.top = `${centerY}px`;
       piecesContainer.appendChild(circle);
-
-      console.log(`Piece at row ${r}, col ${c}: rect.top = ${rect.top}`);
     });
   };
 

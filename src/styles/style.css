@@ -299,6 +299,11 @@ body {
   font-size: 2.5rem;
   font-weight: 800;
 }
+.player-board-container,
+.player-board-container * {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .player-board-container {
   width: 370px;
   position: relative;
@@ -378,6 +383,7 @@ body {
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 99;
+  outline: none;
 }
 
 .game-board-footer {
@@ -484,11 +490,6 @@ body {
 }
 .pink-bg {
   background-color: #fd6687;
-}
-.highlight {
-  outline: 4px solid gold;
-  border-radius: 50%;
-  box-shadow: 0 0 15px gold;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -732,10 +733,6 @@ body {
   }
   .rules-section {
     padding-inline: 30px;
-  }
-  .highlight-circle {
-    width: 20px;
-    height: 20px;
   }
 }
 @media (min-width: 381px) and (max-width: 400px) {

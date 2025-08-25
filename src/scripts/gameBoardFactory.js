@@ -223,6 +223,29 @@ export function gameBoardFactory(
     winningBoardCont.appendChild(winningBoard);
   };
 
+  const highlightWinningDiscs = (coords) => {
+    coords.forEach(({ r, c }) => {
+      const selector = `.piece[data-row="${r}"][data-col="${c}"]`;
+      const piece = document.querySelector(selector);
+
+      if (!piece) return;
+
+      const rect = piece.getBoundingClientRect();
+      const containerRect = piecesContainer.getBoundingClientRect();
+
+      const centerX = rect.left - containerRect.left + rect.width / 2;
+      const centerY = rect.top - containerRect.top + rect.height / 2;
+
+      const circle = document.createElement("div");
+      circle.classList.add("highlight-circle");
+      circle.style.left = `${centerX}px`;
+      circle.style.top = `${centerY}px`;
+      piecesContainer.appendChild(circle);
+
+      console.log(`Piece at row ${r}, col ${c}: rect.top = ${rect.top}`);
+    });
+  };
+
   const moveMarker = (col) => {
     const colWidth = container.clientWidth / COLS;
     const markerWidth = marker.clientWidth;
@@ -233,29 +256,35 @@ export function gameBoardFactory(
 
   const handleColumnClick = (col) => {
     const dropRow = findAvailableRow(col);
-
     if (dropRow === null) return;
+
     gameBoard[dropRow][col] = currentPlayer;
-    drawPiece(dropRow, col, currentPlayer);
 
-    if (checkWin(currentPlayer)) {
-      stopTime();
-      updateScores(currentPlayer);
-      declareGameOver({ result: "win", winner: currentPlayer });
-      return;
-    }
+    const piece = drawPiece(dropRow, col, currentPlayer);
 
-    //check for stalemete
-    if (board.isBoardFull()) {
-      stopTime();
-      declareGameOver({ result: "stalemate" });
-      return;
-    }
+    //waits until the piece finishes dropping
+    piece.addEventListener("transitionend", function handler() {
+      piece.removeEventListener("transitionend", handler);
 
-    switchPlayer();
-    if (mode === "pvc" && currentPlayer === "cpu") {
-      cpuMove();
-    }
+      const winningCoords = checkWin(currentPlayer);
+      if (winningCoords) {
+        stopTime();
+        highlightWinningDiscs(winningCoords);
+        updateScores(currentPlayer);
+        declareGameOver({ result: "win", winner: currentPlayer });
+        return;
+      }
+
+      if (board.isBoardFull()) {
+        stopTime();
+        declareGameOver({ result: "stalemate" });
+        return;
+      }
+      switchPlayer();
+      if (mode === "pvc" && currentPlayer === "cpu") {
+        cpuMove();
+      }
+    });
   };
 
   const findAvailableRow = (col) => {
@@ -301,6 +330,10 @@ export function gameBoardFactory(
     piece.style.height = `${pieceSize}px`;
     piece.style.left = `${left}px`;
 
+    //store row and column
+    piece.dataset.row = row;
+    piece.dataset.col = col;
+
     // Start above the board
     piece.style.top = `-${pieceSize}px`;
 
@@ -311,6 +344,8 @@ export function gameBoardFactory(
 
     // Animate to final position
     piece.style.top = `${finalTop}px`;
+
+    return piece;
   };
 
   const clearBoardUI = () => {

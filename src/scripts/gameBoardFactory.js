@@ -300,8 +300,6 @@ export function gameBoardFactory(
 
   const cpuMove = () => {
     const col = AI.getMove(gameBoard, "cpu", "P1");
-    console.log(col);
-
     setTimeout(() => handleColumnClick(col), 500);
   };
 

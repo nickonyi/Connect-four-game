@@ -58,4 +58,4 @@ The next step for me would be to deepen my familiarity with React. I plan to exp
 
 ## Author
 
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
+- Frontend Mentor - [@nickonyi](https://www.frontendmentor.io/profile/nickonyi)
